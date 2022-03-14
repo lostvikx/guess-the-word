@@ -21,7 +21,7 @@ with open(path + "/words_alpha.txt", "r") as main_file, open(path + save_file_na
   word_count = 0
 
   for word in main_file:
-    word = word.strip()
+    word = word.lower().strip()
 
     if word_len == len(word):
       word_count += 1
