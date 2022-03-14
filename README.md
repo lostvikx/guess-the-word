@@ -1,2 +1,3 @@
-# guess-the-word
-A wordle clone with some custom features, meant for enjoyment 🤙
+# Guess the word challenge
+
+Do you think you can beat the game? Try it out!
