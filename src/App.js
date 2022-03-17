@@ -17,9 +17,10 @@ export default function App() {
   return (
     <main className="container">
       <Header />
-      {gameType === null 
-        ? <SelectGame handleGameType={handleClick} />
-        : <Main letters={gameType} />
+      {
+        gameType === null 
+          ? <SelectGame handleGameType={handleClick} />
+          : <Main letters={gameType} />
       }
     </main>
   );
