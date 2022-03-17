@@ -9,7 +9,7 @@ export default function SelectGame(props) {
           type="button" 
           className="btn" 
           value={5} 
-          onClick={(event) => props.handleGameType(event.target.value)}
+          onClick={(event) => props.handleClick(event.target.value)}
         >
           5
         </button>
@@ -17,7 +17,7 @@ export default function SelectGame(props) {
           type="button" 
           className="btn" 
           value={6} 
-          onClick={(event) => props.handleGameType(event.target.value)}
+          onClick={(event) => props.handleClick(event.target.value)}
         >
           6
         </button>
@@ -25,7 +25,7 @@ export default function SelectGame(props) {
           type="button" 
           className="btn" 
           value={7} 
-          onClick={(event) => props.handleGameType(event.target.value)}
+          onClick={(event) => props.handleClick(event.target.value)}
         >
           7
         </button>

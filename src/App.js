@@ -5,22 +5,22 @@ import SelectGame from "./components/SelectGame";
 
 export default function App() {
 
-  const [gameType, setGameType] = useState(null);
+  const [numLetters, setNumLetters] = useState(null);
   document.title = "Guess The Word";
 
-  console.log("gameType state:", gameType);
+  console.log("gameType state:", numLetters);
 
-  function handleClick(nLetters) {
-    setGameType(nLetters);
+  function handleClick(num) {
+    numLetters ? setNumLetters(null) : setNumLetters(num)
   }
 
   return (
     <main className="container">
       <Header />
       {
-        gameType === null 
-          ? <SelectGame handleGameType={handleClick} />
-          : <Main letters={gameType} />
+        numLetters === null
+          ? <SelectGame handleClick={handleClick} />
+          : <Main numLetters={numLetters} handleClick={handleClick} />
       }
     </main>
   );

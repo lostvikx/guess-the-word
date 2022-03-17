@@ -6,7 +6,13 @@ export default function Main(props) {
 
   return (
     <div>
-      Game Area
+      <h1>Guess a {props.numLetters} letter word 🤠</h1>
+      <button 
+        type="button" 
+        onClick={() => props.handleClick(null)}
+      >
+        Reset
+      </button>
     </div>
   );
 }
