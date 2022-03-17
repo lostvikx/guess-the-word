@@ -15,13 +15,13 @@ export default function App() {
   }
 
   return (
-    <main className="container">
+    <div className="container">
       <Header />
       {
         numLetters === null
           ? <SelectNumLetters handleClick={handleClick} />
           : <Main numLetters={numLetters} handleClick={handleClick} />
       }
-    </main>
+    </div>
   );
 }

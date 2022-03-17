@@ -1,5 +1,5 @@
 import React from "react";
-import GuessBoxes from "./components/GuessBoxes";
+import GameBox from "./components/GameBox";
 
 export default function Main(props) {
 
@@ -8,29 +8,7 @@ export default function Main(props) {
   return (
     <div>
       <h1>Guess a {props.numLetters} letter word 🤠</h1>
-      <div className="game-box flex-col">
-        <div className="game-row flex-row">
-          <GuessBoxes numLetters={props.numLetters} />
-        </div>
-        <div className="game-row flex-row">
-          <GuessBoxes numLetters={props.numLetters} />
-        </div>
-        <div className="game-row flex-row">
-          <GuessBoxes numLetters={props.numLetters} />
-        </div>
-        <div className="game-row flex-row">
-          <GuessBoxes numLetters={props.numLetters} />
-        </div>
-        <div className="game-row flex-row">
-          <GuessBoxes numLetters={props.numLetters} />
-        </div>
-        <div className="game-row flex-row">
-          <GuessBoxes numLetters={props.numLetters} />
-        </div>
-        <div className="game-row flex-row">
-          <GuessBoxes numLetters={props.numLetters} />
-        </div>
-      </div>
+      <GameBox numLetters={props.numLetters} />
       <button 
         type="button" 
         onClick={() => props.handleClick(null)}
