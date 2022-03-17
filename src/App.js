@@ -8,11 +8,10 @@ export default function App() {
   const [gameType, setGameType] = useState(null);
   document.title = "Guess The Word";
 
-  console.log("gameType state: ", gameType);
+  console.log("gameType state:", gameType);
 
-  function handleClick(type) {
-    console.log(`Game: ${type} words`);
-    setGameType(true);
+  function handleClick(nLetters) {
+    setGameType(nLetters);
   }
 
   return (
@@ -20,7 +19,7 @@ export default function App() {
       <Header />
       {gameType === null 
         ? <SelectGame handleGameType={handleClick} />
-        : <Main />
+        : <Main letters={gameType} />
       }
     </main>
   );

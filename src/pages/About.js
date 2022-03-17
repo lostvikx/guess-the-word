@@ -6,6 +6,9 @@ export default function About() {
   document.title = document.title + " | About";
 
   return (
-    <Header />
+    <div>
+      <Header />
+      Some things about the game!
+    </div>
   );
 }
