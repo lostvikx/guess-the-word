@@ -1,6 +1,5 @@
 import React from "react";
-
-const GuessBoxes = (props) => Array.from(Array(props.numLetters).keys()).map((_, i) => <div key={i}>{i}</div>);
+import GuessBoxes from "./components/GuessBoxes";
 
 export default function Main(props) {
 
@@ -9,8 +8,28 @@ export default function Main(props) {
   return (
     <div>
       <h1>Guess a {props.numLetters} letter word 🤠</h1>
-      <div>
-        <GuessBoxes numLetters={props.numLetters} />
+      <div className="game-box flex-col">
+        <div className="game-row flex-row">
+          <GuessBoxes numLetters={props.numLetters} />
+        </div>
+        <div className="game-row flex-row">
+          <GuessBoxes numLetters={props.numLetters} />
+        </div>
+        <div className="game-row flex-row">
+          <GuessBoxes numLetters={props.numLetters} />
+        </div>
+        <div className="game-row flex-row">
+          <GuessBoxes numLetters={props.numLetters} />
+        </div>
+        <div className="game-row flex-row">
+          <GuessBoxes numLetters={props.numLetters} />
+        </div>
+        <div className="game-row flex-row">
+          <GuessBoxes numLetters={props.numLetters} />
+        </div>
+        <div className="game-row flex-row">
+          <GuessBoxes numLetters={props.numLetters} />
+        </div>
       </div>
       <button 
         type="button" 

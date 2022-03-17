@@ -13,15 +13,15 @@ export default function SelectNumLetters(props) {
         onClick={(event) => props.handleClick(Number(event.target.value))}
         key={i}
       >
-        {number}
+        {number} Letters
       </button>
     );
   });
 
   return (
     <div>
-      <h2>Select the number of letters:</h2>
-      <div>
+      <h2>Select difficulty:</h2>
+      <div className="flex-row num-btns">
         {buttonList}
       </div>
     </div>

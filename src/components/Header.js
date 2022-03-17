@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <nav>
+    <nav className="nav-bar">
       <div className="logo">📖</div>
-      <ul>
+      <ul className="nav-links">
         <li><Link to="/">Play!</Link></li>
         <li><Link to="/about">About</Link></li>
       </ul>
