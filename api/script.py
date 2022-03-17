@@ -10,11 +10,11 @@ while True:
     print("Please enter a valid number!\n")
     continue
 
-path = os.getcwd()
-
+path = os.path.dirname(__file__)
+word_file_name = "/words_list.txt"
 save_file_name = f"/{word_len}_letter_words.txt"
 
-with open(path + "/words_alpha.txt", "r") as main_file, open(path + save_file_name, "w+") as save_file:
+with open(path + word_file_name, "r") as main_file, open(path + save_file_name, "w+") as save_file:
 
   print(f"\nSaving all {word_len} letter words to a file...")
 
