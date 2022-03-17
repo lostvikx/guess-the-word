@@ -10,7 +10,7 @@ export default function SelectNumLetters(props) {
         type="button"
         className="letter-num-selection-btn"
         value={number}
-        onClick={(event) => props.handleClick(event.target.value)}
+        onClick={(event) => props.handleClick(Number(event.target.value))}
         key={i}
       >
         {number}
