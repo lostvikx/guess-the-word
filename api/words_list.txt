@@ -7865,7 +7865,6 @@ chaperon
 chaperone
 chaperoned
 chaperones
-chaplain
 chaplaincy
 chaplains
 chaplain
@@ -11650,7 +11649,6 @@ crores
 crosier
 crosiers
 cross
-cross-bun
 crossbar
 crossbars
 crossbones

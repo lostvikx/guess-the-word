@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 
+# The file words_list.txt had "bad words", that I removed.
+# "Bad words": A word that contains a punctuation mark or appears in the list multiple times.
+
 import os
+import string
 
 while True:
   try:
@@ -28,4 +32,3 @@ with open(path + word_file_name, "r") as main_file, open(path + "/out" + save_fi
       save_file.write(word + "\n")
 
 print(f"\n{word_count} word{'' if word_count == 1 else 's'} saved in file {save_file_name[1:]} 🥳")
-
