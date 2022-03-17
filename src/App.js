@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Header from "./components/Header";
 import Main from "./Main";
-import SelectGame from "./components/SelectGame";
+import SelectNumLetters from "./components/SelectNumLetters";
 
 export default function App() {
 
   const [numLetters, setNumLetters] = useState(null);
   document.title = "Guess The Word";
 
-  console.log("numLetters state:", numLetters);
+  // console.log("numLetters state:", numLetters);
 
   function handleClick(num) {
     numLetters ? setNumLetters(null) : setNumLetters(num)
@@ -19,7 +19,7 @@ export default function App() {
       <Header />
       {
         numLetters === null
-          ? <SelectGame handleClick={handleClick} />
+          ? <SelectNumLetters handleClick={handleClick} />
           : <Main numLetters={numLetters} handleClick={handleClick} />
       }
     </main>

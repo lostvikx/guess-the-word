@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function SelectGame(props) {
+export default function SelectNumLetters(props) {
 
   const wordNumberSelection = [5, 6, 7, 8];
   
