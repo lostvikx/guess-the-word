@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 export default function Header() {
   return (
     <nav>
-      <figure><img src="#" alt="logo" /></figure>
+      <div className="logo">📖</div>
       <ul>
-        <li><Link to="/" />Play!</li>
-        <li><Link to="/about-game" />About</li>
+        <li><Link to="/">Play!</Link></li>
+        <li><Link to="/about-game">About</Link></li>
       </ul>
     </nav>
   );

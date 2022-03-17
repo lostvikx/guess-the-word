@@ -2,11 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import About from "./pages/About";
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <Routes>
+      <Route path="/" element={<App />} />
+      <Route path="/about-game" element={<About />} />
+    </Routes>
   </BrowserRouter>,
   document.getElementById('root')
 );
