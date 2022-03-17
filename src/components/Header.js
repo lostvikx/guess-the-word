@@ -7,7 +7,7 @@ export default function Header() {
       <div className="logo">📖</div>
       <ul>
         <li><Link to="/">Play!</Link></li>
-        <li><Link to="/about-game">About</Link></li>
+        <li><Link to="/about">About</Link></li>
       </ul>
     </nav>
   );
