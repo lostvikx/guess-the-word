@@ -24,15 +24,21 @@ export default function GameBox(props) {
   const [word, setWord] = useState("");
 
   const makeWord = (event) => {
-    setWord((prevWord) => prevWord + event.key);
+    // console.log(event);
+    // only alphabets allowed
+    if (event.keyCode >= 65 && event.keyCode <= 90) {
+      setWord((prevWord) => prevWord + event.key.toLowerCase());
+    } else if (event.keyCode === 8) {
+      console.log("backspace");
+    }
   }
 
   useEffect(() => {
-    document.addEventListener("keypress", makeWord);
+    document.addEventListener("keyup", makeWord);
 
     return () => {
       console.log("cleaning up...")
-      document.removeEventListener("keypress", makeWord);
+      document.removeEventListener("keyup", makeWord);
     }
   }, []);
 
