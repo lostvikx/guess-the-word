@@ -8,7 +8,7 @@ export default function Main(props) {
 
   return (
     <div>
-      <h1>Guess a {props.numLetters} letter word 🤠</h1>
+      <h1>Guess a {props.numLetters} letter word</h1>
       <GameBox numLetters={props.numLetters} />
     </div>
   );

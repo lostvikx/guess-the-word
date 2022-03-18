@@ -8,7 +8,7 @@ export default function About() {
   return (
     <div>
       <Header />
-      Some things about the game!
+      <h1>Fun facts about the game!</h1>
     </div>
   );
 }

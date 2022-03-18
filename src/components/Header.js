@@ -19,12 +19,11 @@ export default function Header(props) {
           : <div
               className="logo"
             >
-              GuessTheWord
+              <Link to="/">GuessTheWord</Link>
             </div>
       }
       
       <ul className="nav-links">
-        <li><Link to="/">Play</Link></li>
         <li><Link to="/about">About</Link></li>
       </ul>
 
