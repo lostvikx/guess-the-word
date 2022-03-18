@@ -21,8 +21,9 @@ const GuessRow = (props) => {
 
 export default function GameBox(props) {
 
+  // This can be changed to alter the difficulty of the game!
   const numOfGuesses = 6;
-  const [word, setWord] = useState("");
+  const [word, setWord] = useState([]);
   // const [metaWord, setMetaWord] = useState("vikram");
 
   const guesses = [];
@@ -32,15 +33,18 @@ export default function GameBox(props) {
     i++;
   }
 
-  console.log(guesses);
+  const [ allGuesses, setAllGuesses ] = useState(guesses);
+
+  console.log(allGuesses);
 
   const makeWord = (event) => {
     // console.log(event);
     // only alphabets allowed
     if (event.keyCode >= 65 && event.keyCode <= 90) {
-      setWord((prevWord) => prevWord + event.key.toLowerCase());
+      setWord((prevWord) => prevWord.concat(event.key.toLowerCase()));
     } else if (event.keyCode === 8 || event.keyCode === 46) {
-      console.log("backspace");
+      // console.log("backspace");
+      setWord(prevWord => prevWord.slice(0, -1));
     } else if (event.keyCode === 13) {
       console.log("enter!");
     }
