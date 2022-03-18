@@ -8,7 +8,7 @@ export default function App() {
   const [ numLetters, setNumLetters ] = useState(null);
   document.title = "Guess The Word";
 
-  // console.log("numLetters state:", numLetters);
+  console.log("numLetters state:", numLetters);
 
   function handleClick(num) {
     numLetters ? setNumLetters(null) : setNumLetters(num);

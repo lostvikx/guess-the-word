@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // Each box gets mapped into a div
 const GuessBoxes = (props) => {
@@ -20,6 +20,24 @@ const GuessRow = (props) => {
 }
 
 export default function GameBox(props) {
+
+  const [word, setWord] = useState("");
+
+  const makeWord = (event) => {
+    setWord((prevWord) => prevWord + event.key);
+  }
+
+  useEffect(() => {
+    document.addEventListener("keypress", makeWord);
+
+    return () => {
+      console.log("cleaning up...")
+      document.removeEventListener("keypress", makeWord);
+    }
+  }, []);
+
+  word && console.log("word:", word);
+
   return (
     <div className="game-box">
       <GuessRow numLetters={props.numLetters} />
