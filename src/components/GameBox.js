@@ -1,44 +1,27 @@
 import React, { useEffect, useState } from "react";
 
-// The guess-row, we have 6 of them!
-const GuessRow = (props) => {
-  // All boxes get mapped into a div-row
-  const boxes = Array
-    .from(Array(props.numLetters).keys())
-    .map((_, i) => {
-      const letter = props.word[i];
-      return (
-        <div className="box" key={i}>{letter}</div>
-      );
-    });
 
-  return (
-    <div className="game-row">
-      { boxes }
-    </div>
-  );
+
+// This can be changed to alter the difficulty of the game!
+const numOfGuesses = 6;
+
+const guesses = [];
+let i = 0;
+while (i < numOfGuesses) {
+  guesses.push("");
+  i++;
 }
+
+let guessEnum = 0;
+
+// test
+guesses[0] = "yellow";
+// guesses[3] = "tigers";
 
 export default function GameBox(props) {
 
-  // This can be changed to alter the difficulty of the game!
-  const numOfGuesses = 6;
-  const [ word, setWord ] = useState([]);
-  // const [metaWord, setMetaWord] = useState("vikram");
-
-  const guesses = [];
-  let i = 0;
-  while (i < numOfGuesses) {
-    guesses.push("");
-    i++;
-  }
-
-  // test
-  guesses[1] = "vikram";
-  guesses[3] = "yellow";
-
+  const [ word, setWord ] = useState("");
   const [ allGuesses, setAllGuesses ] = useState(guesses);
-  // console.log(allGuesses);
 
   useEffect(() => {
     const makeWord = (event) => {
@@ -55,7 +38,7 @@ export default function GameBox(props) {
             console.log("reached the word length limit!");
             return prevWord;
           } else {
-            return prevWord.concat(event.key.toLowerCase())
+            return prevWord + event.key.toLowerCase();
           }
         });
       }
@@ -63,28 +46,68 @@ export default function GameBox(props) {
         setWord(prevWord => prevWord.slice(0, -1));
       }
       else if (keyIsEnter) {
-        console.log("enter!");
         if (word.length === props.numLetters) {
-          setAllGuesses(word);
+          console.log("enter!");
+          setAllGuesses(prevAllGuesses => {
+
+            const newGuessesArr = prevAllGuesses.filter(guess => guess !== "");
+
+            if (newGuessesArr.length === numOfGuesses) {
+              console.log("No more guesses!");
+              return newGuessesArr;
+            }
+
+            newGuessesArr.push(word);
+            console.log(newGuessesArr);
+
+            while (newGuessesArr.length < numOfGuesses) {
+              newGuessesArr.push("");
+            }
+
+            return newGuessesArr;
+          });
+
+          setWord("");
         }
       }
     }
 
-    document.addEventListener("keyup", makeWord);
+    document.addEventListener("keydown", makeWord);
 
     // Clean-up function
     return () => {
       // console.log("cleaning up...");
-      document.removeEventListener("keyup", makeWord);
+      document.removeEventListener("keydown", makeWord);
     }
   }, [ word ]);
 
-  word && console.log(word, word.length);
-  console.log(allGuesses);
+  // console.log("word state:" ,word, word.length);
+  console.log("allGuesses state:", allGuesses);
 
-  const allGuessRows = guesses.map((guess, i) => {
+  // The guess-row, we have 6 of them!
+  const GuessRow = (props) => {
+    // All boxes get mapped into a div-row
+    const boxes = Array
+      .from(Array(props.numLetters).keys())
+      .map((_, i) => {
+        const letter = props.word[i];
+        // letter && console.log(letter);
+        return (
+          <div className="box" key={i}>{letter}</div>
+        );
+      });
+
     return (
-      <GuessRow 
+      <div className="game-row">
+        {boxes}
+      </div>
+    );
+  }
+
+
+  const allGuessRows = allGuesses.map((guess, i) => {
+    return (
+      <GuessRow
         numLetters={props.numLetters}
         word={guess}
         key={i}
@@ -92,7 +115,7 @@ export default function GameBox(props) {
     );
   });
 
-  const testWords = ["vikram", "yellow"];
+  
 
   return (
     <div className="game-box">
