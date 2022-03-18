@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-
-
 // This can be changed to alter the difficulty of the game!
 const numOfGuesses = 6;
 
+// This is imp
 const guesses = [];
 let i = 0;
 while (i < numOfGuesses) {
@@ -12,63 +11,54 @@ while (i < numOfGuesses) {
   i++;
 }
 
-let guessEnum = 0;
-
-// test
-guesses[0] = "yellow";
-// guesses[3] = "tigers";
-
 export default function GameBox(props) {
 
-  const [ word, setWord ] = useState("");
+  const [guessEnum, setGuessEnum] = useState(0);
   const [ allGuesses, setAllGuesses ] = useState(guesses);
 
   useEffect(() => {
     const makeWord = (event) => {
 
-      const keyIsChar = event.keyCode >= 65 && event.keyCode <= 90;
-      const keyIsDel = event.keyCode === 8 || event.keyCode === 46;
-      const keyIsEnter = event.keyCode === 13;
+      const hasChance = guessEnum < numOfGuesses;
+      const keyIsChar = hasChance && event.keyCode >= 65 && event.keyCode <= 90;
+      const keyIsDel = hasChance && (event.keyCode === 8 || event.keyCode === 46);
+      const keyIsEnter = hasChance && event.keyCode === 13;
 
-      // only alphabets allowed
       if (keyIsChar) {
-        setWord((prevWord) => {
-          // limited to numLetters length
-          if (prevWord.length === props.numLetters) {
-            console.log("reached the word length limit!");
-            return prevWord;
+
+        setAllGuesses(prevAllGuesses => {
+          const newAllGuessesArr = [...prevAllGuesses];
+          if (newAllGuessesArr[guessEnum].length < props.numLetters) {
+            newAllGuessesArr[guessEnum] += event.key.toLowerCase();
+            return newAllGuessesArr;
           } else {
-            return prevWord + event.key.toLowerCase();
+            return prevAllGuesses;
           }
         });
+
       }
-      else if (keyIsDel) {
-        setWord(prevWord => prevWord.slice(0, -1));
+
+      if (keyIsDel) {
+
+        setAllGuesses(prevAllGuesses => {
+          const newAllGuessesArr = [...prevAllGuesses];
+          if (newAllGuessesArr[guessEnum].length > 0) {
+            newAllGuessesArr[guessEnum] = newAllGuessesArr[guessEnum].slice(0, -1);
+            return newAllGuessesArr;
+          } else {
+            return prevAllGuesses;
+          }
+        });
+
       }
-      else if (keyIsEnter) {
-        if (word.length === props.numLetters) {
-          console.log("enter!");
-          setAllGuesses(prevAllGuesses => {
 
-            const newGuessesArr = prevAllGuesses.filter(guess => guess !== "");
+      if (keyIsEnter) {
 
-            if (newGuessesArr.length === numOfGuesses) {
-              console.log("No more guesses!");
-              return newGuessesArr;
-            }
-
-            newGuessesArr.push(word);
-            console.log(newGuessesArr);
-
-            while (newGuessesArr.length < numOfGuesses) {
-              newGuessesArr.push("");
-            }
-
-            return newGuessesArr;
-          });
-
-          setWord("");
+        if (allGuesses[guessEnum].length === props.numLetters) {
+          console.log("Enter!");
+          setGuessEnum(prevGuessEnum => prevGuessEnum + 1);
         }
+
       }
     }
 
@@ -79,9 +69,8 @@ export default function GameBox(props) {
       // console.log("cleaning up...");
       document.removeEventListener("keydown", makeWord);
     }
-  }, [ word ]);
+  }, [props.numLetters, allGuesses, guessEnum]);
 
-  // console.log("word state:" ,word, word.length);
   console.log("allGuesses state:", allGuesses);
 
   // The guess-row, we have 6 of them!
@@ -104,7 +93,6 @@ export default function GameBox(props) {
     );
   }
 
-
   const allGuessRows = allGuesses.map((guess, i) => {
     return (
       <GuessRow
@@ -115,23 +103,9 @@ export default function GameBox(props) {
     );
   });
 
-  
-
   return (
     <div className="game-box">
       { allGuessRows }
-      {/* <GuessRow
-        numLetters={props.numLetters}
-        word={testWords[0]}
-      />
-      <GuessRow
-        numLetters={props.numLetters}
-        word={testWords[1]}
-      />
-      <GuessRow
-        numLetters={props.numLetters}
-        word={word}
-      /> */}
     </div>
   );
 }
