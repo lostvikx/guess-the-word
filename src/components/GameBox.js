@@ -11,7 +11,6 @@ const GuessBoxes = (props) => {
 }
 
 // The guess-row, we have 6 of them!
-const numOfGuesses = 6;
 const GuessRow = (props) => {
   return (
     <div className="game-row">
@@ -22,6 +21,7 @@ const GuessRow = (props) => {
 
 export default function GameBox(props) {
 
+  const numOfGuesses = 6;
   const [word, setWord] = useState("");
   // const [metaWord, setMetaWord] = useState("vikram");
 
