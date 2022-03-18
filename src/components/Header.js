@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Header(props) {
 
-  Object.keys(props).length ? console.log(props) : console.log("no props");
+  // Object.keys(props).length ? console.log(props) : console.log("no props");
 
   return (
     <nav className="nav-bar">
@@ -14,7 +14,7 @@ export default function Header(props) {
               className="back-btn"
               onClick={() => props.handleClick(null)}
             >
-              ⬅
+              ⬅ Back
             </div>
           : <div
               className="logo"
@@ -25,6 +25,7 @@ export default function Header(props) {
       
       <ul className="nav-links">
         <li><Link to="/about">About</Link></li>
+        <li><a href="https://github.com/lostvikx/guess-the-word" target="_blank" rel="noreferrer">GitHub</a></li>
       </ul>
 
     </nav>

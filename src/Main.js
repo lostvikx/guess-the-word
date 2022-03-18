@@ -3,8 +3,8 @@ import GameBox from "./components/GameBox";
 
 export default function Main(props) {
 
-  console.log(props.numLetters);
-  document.title = `Guess The Word | ${props.numLetters} Letters Challenge`;
+  // console.log(props.numLetters);
+  document.title = `${props.numLetters} Letters Challenge | Guess The Word`;
 
   return (
     <div>

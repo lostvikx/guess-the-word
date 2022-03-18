@@ -1,30 +1,33 @@
 import React from "react";
-import GuessBoxes from "./GuessBoxes";
+
+// Each box gets mapped into a div
+const GuessBoxes = (props) => {
+  return Array.from(Array(props.numLetters).keys())
+    .map((_, i) => {
+      return (
+        <div className="box" key={i}></div>
+      );
+    });
+}
+
+// The guess-row, we have 6 of them!
+const GuessRow = (props) => {
+  return (
+    <div className="game-row">
+      <GuessBoxes numLetters={props.numLetters} />
+    </div>
+  );
+}
 
 export default function GameBox(props) {
   return (
     <div className="game-box">
-      <div className="game-row">
-        <GuessBoxes numLetters={props.numLetters} />
-      </div>
-      <div className="game-row">
-        <GuessBoxes numLetters={props.numLetters} />
-      </div>
-      <div className="game-row">
-        <GuessBoxes numLetters={props.numLetters} />
-      </div>
-      <div className="game-row">
-        <GuessBoxes numLetters={props.numLetters} />
-      </div>
-      <div className="game-row">
-        <GuessBoxes numLetters={props.numLetters} />
-      </div>
-      <div className="game-row">
-        <GuessBoxes numLetters={props.numLetters} />
-      </div>
-      <div className="game-row">
-        <GuessBoxes numLetters={props.numLetters} />
-      </div>
+      <GuessRow numLetters={props.numLetters} />
+      <GuessRow numLetters={props.numLetters} />
+      <GuessRow numLetters={props.numLetters} />
+      <GuessRow numLetters={props.numLetters} />
+      <GuessRow numLetters={props.numLetters} />
+      <GuessRow numLetters={props.numLetters} />
     </div>
   );
 }
