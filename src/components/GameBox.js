@@ -28,7 +28,7 @@ export default function GameBox(props) {
     // only alphabets allowed
     if (event.keyCode >= 65 && event.keyCode <= 90) {
       setWord((prevWord) => prevWord + event.key.toLowerCase());
-    } else if (event.keyCode === 8) {
+    } else if (event.keyCode === 8 || event.keyCode === 46) {
       console.log("backspace");
     }
   }
