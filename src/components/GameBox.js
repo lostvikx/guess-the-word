@@ -34,7 +34,7 @@ export default function GameBox(props) {
   }
 
   // test
-  guesses[0] = "vikram";
+  guesses[1] = "vikram";
   guesses[3] = "yellow";
 
   const [ allGuesses, setAllGuesses ] = useState(guesses);
