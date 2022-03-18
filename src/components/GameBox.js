@@ -33,6 +33,10 @@ export default function GameBox(props) {
     i++;
   }
 
+  // test
+  guesses[0] = "vikram";
+  guesses[3] = "yellow";
+
   const [ allGuesses, setAllGuesses ] = useState(guesses);
   // console.log(allGuesses);
 
@@ -78,11 +82,11 @@ export default function GameBox(props) {
   word && console.log(word, word.length);
   console.log(allGuesses);
 
-  const allGuessRows = guesses.map((_, i) => {
+  const allGuessRows = guesses.map((guess, i) => {
     return (
       <GuessRow 
         numLetters={props.numLetters}
-        word={word}
+        word={guess}
         key={i}
       />
     );
@@ -92,8 +96,8 @@ export default function GameBox(props) {
 
   return (
     <div className="game-box">
-      {/* { allGuessRows } */}
-      <GuessRow
+      { allGuessRows }
+      {/* <GuessRow
         numLetters={props.numLetters}
         word={testWords[0]}
       />
@@ -104,7 +108,7 @@ export default function GameBox(props) {
       <GuessRow
         numLetters={props.numLetters}
         word={word}
-      />
+      /> */}
     </div>
   );
 }
