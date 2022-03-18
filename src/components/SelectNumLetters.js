@@ -21,7 +21,7 @@ export default function SelectNumLetters(props) {
   return (
     <div>
       <h2>Select difficulty:</h2>
-      <div className="flex-row num-btns">
+      <div className="num-btns">
         {buttonList}
       </div>
     </div>

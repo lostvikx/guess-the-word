@@ -46,25 +46,30 @@ body {
 .game-box {
   margin: 0 1rem;
   display: grid;
-  grid-template-rows: none;
+  grid-template-rows: repeat(6, 1fr);
   gap: 0.2rem;
 }
 
 .game-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.1rem;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.2rem;
 }
 
 .box {
   border: 1px solid black;
-  /* min-width: 40px;
-  min-height: 40px; */
+  min-width: 40px;
+  min-height: 40px;
 }
 
 .num-btns {
   gap: 1rem;
   margin: 2rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .letter-num-selection-btn {
@@ -83,4 +88,8 @@ code {
 
 li {
   list-style: none;
+}
+
+.back-btn {
+  cursor: pointer;
 }

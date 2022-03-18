@@ -1,14 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Header() {
+export default function Header(props) {
+
+  Object.keys(props).length ? console.log(props) : console.log("no props");
+
   return (
     <nav className="nav-bar">
-      <div className="logo">📖</div>
+
+      {
+        Object.keys(props).length
+          ? <div 
+              className="back-btn"
+              onClick={() => props.handleClick(null)}
+            >
+              ⬅
+            </div>
+          : <div
+              className="logo"
+            >
+              GuessTheWord
+            </div>
+      }
+      
       <ul className="nav-links">
-        <li><Link to="/">Play!</Link></li>
+        <li><Link to="/">Play</Link></li>
         <li><Link to="/about">About</Link></li>
       </ul>
+
     </nav>
   );
 }
