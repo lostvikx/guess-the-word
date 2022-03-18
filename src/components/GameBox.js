@@ -11,6 +11,7 @@ const GuessBoxes = (props) => {
 }
 
 // The guess-row, we have 6 of them!
+const numOfGuesses = 6;
 const GuessRow = (props) => {
   return (
     <div className="game-row">
@@ -22,6 +23,16 @@ const GuessRow = (props) => {
 export default function GameBox(props) {
 
   const [word, setWord] = useState("");
+  // const [metaWord, setMetaWord] = useState("vikram");
+
+  const guesses = [];
+  let i = 0;
+  while (i < numOfGuesses) {
+    guesses.push("");
+    i++;
+  }
+
+  console.log(guesses);
 
   const makeWord = (event) => {
     // console.log(event);
@@ -30,6 +41,8 @@ export default function GameBox(props) {
       setWord((prevWord) => prevWord + event.key.toLowerCase());
     } else if (event.keyCode === 8 || event.keyCode === 46) {
       console.log("backspace");
+    } else if (event.keyCode === 13) {
+      console.log("enter!");
     }
   }
 
@@ -44,14 +57,15 @@ export default function GameBox(props) {
 
   word && console.log("word:", word);
 
+  const allGuessRows = guesses.map((_, i) => {
+    return (
+      <GuessRow numLetters={props.numLetters} key={i} />
+    );
+  });
+
   return (
     <div className="game-box">
-      <GuessRow numLetters={props.numLetters} />
-      <GuessRow numLetters={props.numLetters} />
-      <GuessRow numLetters={props.numLetters} />
-      <GuessRow numLetters={props.numLetters} />
-      <GuessRow numLetters={props.numLetters} />
-      <GuessRow numLetters={props.numLetters} />
+      {allGuessRows}
     </div>
   );
 }
