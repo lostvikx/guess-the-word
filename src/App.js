@@ -10,6 +10,7 @@ export default function App() {
 
   console.log("numLetters state:", numLetters);
 
+  // for selecting the numLetters and the back button
   function handleClick(num) {
     numLetters ? setNumLetters(null) : setNumLetters(num);
   }

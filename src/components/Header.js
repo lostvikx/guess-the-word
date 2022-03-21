@@ -16,16 +16,16 @@ export default function Header(props) {
             >
               ⬅ Back
             </div>
-          : <div
-              className="logo"
-            >
+          : <div className="logo">
               <Link to="/">GuessTheWord</Link>
             </div>
       }
       
       <ul className="nav-links">
         <li><Link to="/about">About</Link></li>
-        <li><a href="https://github.com/lostvikx/guess-the-word" target="_blank" rel="noreferrer">GitHub</a></li>
+        <li>
+          <a href="https://github.com/lostvikx/guess-the-word" target="_blank" rel="noreferrer">GitHub</a>
+        </li>
       </ul>
 
     </nav>
