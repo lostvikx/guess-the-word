@@ -1,45 +1,9 @@
 import React, { useEffect, useState } from "react";
+import matchLetters from "../helper/matchLetters";
 
 // This can be changed to alter the difficulty of the game!
 const numOfGuesses = 6;
-const metaWord = "vikram";
-
-/**
- * matchLetters takes two arguments.
- * The return value is an object of with properties of exact and includes that match.
- * @param {string} word - variable metaWord
- * @param {string} guess - variable guessWord
- * @return {[object]} - indices of match letters
- */
-function matchLetters(word, guess) {
-
-  console.assert(word.length === guess.length);
-
-  const matches = {
-    exact: [],
-    contains: []
-  };
-
-  let iter = 0;
-
-  while (iter < word.length) {
-
-    // exact match (green)
-    if (word[iter] === guess[iter]) {
-      // console.log(word[iter]);
-      matches.exact.push(iter);
-    } 
-    // contains (orange)
-    else if (word.includes(guess[iter])) {
-      matches.contains.push(iter);
-    }
-
-    iter++;
-  }
-
-  return matches;
-
-}
+const metaWord = "memoir";
 
 // console.log(matchLetters(metaWord, "kitvip"));
 
@@ -137,39 +101,6 @@ export default function GameBox(props) {
     matched && console.log("matched object", matched);
 
     // All boxes get mapped into a game-row
-    // const boxes = matched 
-    //   ? Array
-    //     .from(Array(props.numLetters).keys())
-    //     .map((_, i) => {
-
-    //       const letter = props.word[i];
-    //       console.log(matched);
-
-    //       return (
-    //         <div 
-    //           className="box exact-match" 
-    //           key={i}
-    //         >
-    //           {letter}
-    //         </div>
-    //       );
-    //     })
-    //   : Array
-    //     .from(Array(props.numLetters).keys())
-    //     .map((_, i) => {
-
-    //       const letter = props.word[i];
-
-    //       return (
-    //         <div
-    //           className="box"
-    //           key={i}
-    //         >
-    //           {letter}
-    //         </div>
-    //       );
-    //     });
-
     const boxes = [];
 
     for (let i = 0; i <props.numLetters; i++) {
