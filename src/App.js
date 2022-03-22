@@ -8,7 +8,7 @@ export default function App() {
   const [ numLetters, setNumLetters ] = useState(null);
   document.title = "GuessTheWord";
 
-  console.log("numLetters state:", numLetters);
+  // console.log("numLetters state:", numLetters);
 
   // for selecting the numLetters and the back button
   function handleClick(num) {

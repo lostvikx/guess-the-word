@@ -108,7 +108,11 @@ export default function GameBox(props) {
           console.log("Enter!");
           setGuessEnum(prevGuessEnum => prevGuessEnum + 1);
 
-          setMatched(matchLetters(metaWord, guessWord));
+          setMatched(prevMatched => {
+            const newMatched = [...prevMatched];
+            newMatched[guessEnum] = matchLetters(metaWord, guessWord);
+            return newMatched;
+          });
 
         }
 
@@ -124,29 +128,75 @@ export default function GameBox(props) {
   }, [props.numLetters, allGuesses, guessEnum]);
 
   // console.log("allGuesses state:", allGuesses);
-  // console.log("matched state:", matched);
+  console.log("matched state:", matched);
 
   // The guess-row, we have 6 of them!
   const GuessRow = (props) => {
 
-    props.matchLetters && console.log(props.matchLetters);
+    const matched = props.matchLetters ? props.matchLetters : null;
+    matched && console.log("matched object", matched);
 
     // All boxes get mapped into a game-row
-    const boxes = Array
-      .from(Array(props.numLetters).keys())
-      .map((_, i) => {
-        // word[index]
-        const letter = props.word[i];
-        // letter && console.log(letter);
-        return (
-          <div 
-            className="box" 
-            key={i}
-          >
-            {letter}
-          </div>
-        );
-      });
+    // const boxes = matched 
+    //   ? Array
+    //     .from(Array(props.numLetters).keys())
+    //     .map((_, i) => {
+
+    //       const letter = props.word[i];
+    //       console.log(matched);
+
+    //       return (
+    //         <div 
+    //           className="box exact-match" 
+    //           key={i}
+    //         >
+    //           {letter}
+    //         </div>
+    //       );
+    //     })
+    //   : Array
+    //     .from(Array(props.numLetters).keys())
+    //     .map((_, i) => {
+
+    //       const letter = props.word[i];
+
+    //       return (
+    //         <div
+    //           className="box"
+    //           key={i}
+    //         >
+    //           {letter}
+    //         </div>
+    //       );
+    //     });
+
+    const boxes = [];
+
+    for (let i = 0; i <props.numLetters; i++) {
+
+      const letter = props.word[i];
+
+      let className = "box";
+
+      if (matched) {
+
+        if (matched.exact.includes(i)) {
+          className = "box exact-match";
+        } else if (matched.contains.includes(i)) {
+          className = "box contains-match";
+        }
+
+      }
+
+      boxes.push(
+        <div
+          className={className}
+          key={i}
+        >
+          {letter}
+        </div>
+      );
+    }
 
     return (
       <div className="game-row">
@@ -161,7 +211,7 @@ export default function GameBox(props) {
         numLetters={props.numLetters}
         word={guess}
         key={i}
-        matchLetters={matched}
+        matchLetters={matched[i] || null}
       />
     );
   });

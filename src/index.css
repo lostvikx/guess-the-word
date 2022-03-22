@@ -62,6 +62,10 @@ a {
   background-color: chartreuse;
 }
 
+.contains-match {
+  background-color: khaki;
+}
+
 .num-btns {
   gap: 1rem;
   margin: 2rem;

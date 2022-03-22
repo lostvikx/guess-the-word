@@ -20,7 +20,7 @@ export default function SelectNumLetters(props) {
 
   return (
     <div>
-      <h1>Select difficulty:</h1>
+      <h1>Select Difficulty:</h1>
       <div className="num-btns">
         {buttonList}
       </div>
