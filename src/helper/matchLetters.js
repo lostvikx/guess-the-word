@@ -9,44 +9,40 @@ export default function matchLetters(word, guess) {
 
   console.assert(word.length === guess.length);
 
+  const letterFrequency = {};
+  for (const letter of word) {
+    letterFrequency[letter] = (letterFrequency[letter]) 
+      ? letterFrequency[letter] + 1 
+      : 1;
+  }
+
+  console.log(letterFrequency);
+
   const matches = {
     exact: [],
     contains: []
   };
 
-  let iter = 0;
-  while (iter < word.length) {
+  let i = 0;
+  while (i < word.length) {
 
     // exact match (green)
-    if (word[iter] === guess[iter]) {
-      matches.exact.push(iter);
+    if (word[i] === guess[i]) {
+      matches.exact.push(i);
+
+      if (letterFrequency[word[i]] > 0) {
+        letterFrequency[word[i]] = letterFrequency[word[i]] - 1
+      }
     }
 
-    iter++;
+    i++;
   }
 
-  iter = 0;
-  while (iter < word.length) {
+  // i = 0;
+  // while (i < word.length) {
 
-    // contains (yellow)
-    // if (word.includes(guess[iter]) && !lettersDone.includes(guess[iter])) {
-    //   matches.contains.push(iter);
-    //   lettersDone.push(guess[iter]);
-    // }
-
-    // let j = 0;
-    // while (j < guess.length) {
-    //   if (word[j] === guess[iter]) {
-    //     if (!matches.contains.includes(iter)) {
-    //       matches.contains.push(iter);
-    //       wordArr.splice(j, 1);
-    //     }
-    //   }
-    //   j++;
-    // }
-
-    iter++;
-  }
+  //   i++;
+  // }
 
   return matches;
 
