@@ -43,7 +43,7 @@ function matchLetters(word, guess) {
 
 // console.log(matchLetters(metaWord, "kitvip"));
 
-// This is imp
+// This is important
 const guesses = [];
 let i = 0;
 while (i < numOfGuesses) {
@@ -53,8 +53,9 @@ while (i < numOfGuesses) {
 
 export default function GameBox(props) {
 
-  const [guessEnum, setGuessEnum] = useState(0);
+  const [ guessEnum, setGuessEnum ] = useState(0);
   const [ allGuesses, setAllGuesses ] = useState(guesses);
+  const [ matched, setMatched ] = useState([]);
 
   useEffect(() => {
 
@@ -107,8 +108,8 @@ export default function GameBox(props) {
           console.log("Enter!");
           setGuessEnum(prevGuessEnum => prevGuessEnum + 1);
 
-          const matched = matchLetters(metaWord, guessWord);
-          console.log(matched);
+          setMatched(matchLetters(metaWord, guessWord));
+
         }
 
       }
@@ -122,10 +123,13 @@ export default function GameBox(props) {
     }
   }, [props.numLetters, allGuesses, guessEnum]);
 
-  console.log("allGuesses state:", allGuesses);
+  // console.log("allGuesses state:", allGuesses);
+  // console.log("matched state:", matched);
 
   // The guess-row, we have 6 of them!
   const GuessRow = (props) => {
+
+    props.matchLetters && console.log(props.matchLetters);
 
     // All boxes get mapped into a game-row
     const boxes = Array
@@ -135,7 +139,12 @@ export default function GameBox(props) {
         const letter = props.word[i];
         // letter && console.log(letter);
         return (
-          <div className="box" key={i}>{letter}</div>
+          <div 
+            className="box" 
+            key={i}
+          >
+            {letter}
+          </div>
         );
       });
 
@@ -152,6 +161,7 @@ export default function GameBox(props) {
         numLetters={props.numLetters}
         word={guess}
         key={i}
+        matchLetters={matched}
       />
     );
   });

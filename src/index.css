@@ -55,6 +55,11 @@ a {
   min-width: 35px;
   min-height: 35px;
   aspect-ratio: 1;
+  text-align: center;
+}
+
+.exact-match {
+  background-color: chartreuse;
 }
 
 .num-btns {
