@@ -3,7 +3,7 @@ import matchLetters from "../helper/matchLetters";
 
 // This can be changed to alter the difficulty of the game!
 const numOfGuesses = 6;
-const metaWord = "memoir";
+const metaWord = "hollow";
 
 // console.log(matchLetters(metaWord, "kitvip"));
 
@@ -97,8 +97,8 @@ export default function GameBox(props) {
   // The guess-row, we have 6 of them!
   const GuessRow = (props) => {
 
-    const matched = props.matchLetters ? props.matchLetters : null;
-    matched && console.log("matched object", matched);
+    const matchedObj = props.matchLetters ? props.matchLetters : null;
+    // matchedObj && console.log("matched object", matchedObj);
 
     // All boxes get mapped into a game-row
     const boxes = [];
@@ -109,11 +109,11 @@ export default function GameBox(props) {
 
       let className = "box";
 
-      if (matched) {
+      if (matchedObj) {
 
-        if (matched.exact.includes(i)) {
+        if (matchedObj.exact.includes(i)) {
           className = "box exact-match";
-        } else if (matched.contains.includes(i)) {
+        } else if (matchedObj.contains.includes(i)) {
           className = "box contains-match";
         }
 
