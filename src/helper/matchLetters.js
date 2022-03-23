@@ -16,7 +16,7 @@ export default function matchLetters(word, guess) {
       : 1;
   }
 
-  console.log("letter frequency:", letterFrequency);
+  // console.log("letter frequency:", letterFrequency);
 
   const matches = {
     exact: [],
@@ -41,13 +41,13 @@ export default function matchLetters(word, guess) {
       letterFrequency[guess[i]]--;
     }
 
-    // If found an exact match after the user has exhausted the frequency of that letter (already guessed it), remove that guess (index) from the matches.contains array.
-    // 
+    // If found an exact match after the user has exhausted the frequency of that letter (already guessed it).
+    // From the matches.contains array, we only remove the value that was exhausted and exactMatch was found.
     if (exactMatch && !canGuess) {
       const newExact = [];
       const newContains = [];
 
-      console.log("matches.contains:", matches.contains);
+      // console.log("matches.contains:", matches.contains);
 
       if (!matches.contains.includes(i) && !newExact.includes(i)) {
         newExact.push(i);
@@ -59,8 +59,7 @@ export default function matchLetters(word, guess) {
         }
       }
 
-      // console.log("removed:", countRemoved);
-      console.log("newExact arr to concat:", newExact);
+      // console.log("newExact arr to concat:", newExact);
       matches.exact.push(...newExact);
       matches.contains = newContains;
     }
