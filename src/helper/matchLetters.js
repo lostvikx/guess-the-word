@@ -28,34 +28,6 @@ export default function matchLetters(word, guess) {
 
     const exactMatch = word[i] === guess[i];
     const canGuess = letterFrequency[guess[i]] > 0;
-    const frequencyIsZero = letterFrequency[guess[i]] === 0;
-
-    // If found an exact match after the user has exhausted the frequency of that letter (already guessed it), remove that guess (index) from the matches.contains array.
-    // 
-    if (exactMatch && frequencyIsZero) {
-      let countRemoved = 0;
-      const newContains = [];
-
-      console.log("matches.contains:", matches.contains);
-
-      for (let j = 0; j < matches.contains.length; j++) {
-        if (matches.contains[j] !== i && !newContains.includes(i)) {
-          newContains.push(i);
-        } else {
-          countRemoved++;
-        }
-      }
-
-      console.log("removed:", countRemoved);
-
-      console.log("new contains arr:", newContains);
-
-      matches.exact.push(...newContains);
-      matches.exact.sort();
-      // matches.contains = newContains;
-      letterFrequency[guess[i]]+=countRemoved;
-      // matches.exact.push(i);
-    }
 
     // exact match (green)
     if (exactMatch && canGuess) {
@@ -67,6 +39,30 @@ export default function matchLetters(word, guess) {
     if (!exactMatch && canGuess) {
       matches.contains.push(i);
       letterFrequency[guess[i]]--;
+    }
+
+    // If found an exact match after the user has exhausted the frequency of that letter (already guessed it), remove that guess (index) from the matches.contains array.
+    // 
+    if (exactMatch && !canGuess) {
+      const newExact = [];
+      const newContains = [];
+
+      console.log("matches.contains:", matches.contains);
+
+      if (!matches.contains.includes(i) && !newExact.includes(i)) {
+        newExact.push(i);
+      }
+
+      for (let j = 0; j < matches.contains.length; j++) {
+        if (guess[j] !== guess[i]) {
+          newContains.push(j);
+        }
+      }
+
+      // console.log("removed:", countRemoved);
+      console.log("newExact arr to concat:", newExact);
+      matches.exact.push(...newExact);
+      matches.contains = newContains;
     }
 
     i++;
