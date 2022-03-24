@@ -96,7 +96,7 @@ export default function GameBox(props) {
 
         // guess string length === numLetters
         if (guessWord.length === props.numLetters) {
-          console.log("Enter!");
+          // console.log("Enter!");
           setGuessEnum(prevGuessEnum => prevGuessEnum + 1);
 
           setMatched(prevMatched => {
@@ -116,7 +116,7 @@ export default function GameBox(props) {
     if (!win) {
       for (const match of matched) {
         if (match.exact.length === props.numLetters) {
-          console.log("Winner!");
+          console.log("Winner! 🎉");
           setWin(true);
           break;
         }
@@ -131,7 +131,7 @@ export default function GameBox(props) {
   }, [props.numLetters, allGuesses, guessEnum, metaWord, win, matched]);
 
   // console.log("allGuesses state:", allGuesses);
-  console.log("matched state:", matched);
+  // console.log("matched state:", matched);
 
   // The guess-row, we have 6 of them!
   const GuessRow = (props) => {
