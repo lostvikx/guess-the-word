@@ -18,6 +18,8 @@ path = os.path.dirname(__file__)
 word_file_name = "/words_list.txt"
 save_file_name = f"/{word_len}_letter_words.txt"
 
+# pathToPublicAssetsDir = f"{path}/../public/assets/{save_file_name}"
+
 with open(path + word_file_name, "r") as main_file, open(path + "/out" + save_file_name, "w+") as save_file:
 
   print(f"\nSaving all {word_len} letter words to a file...")

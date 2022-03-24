@@ -3,23 +3,49 @@ import matchLetters from "../helper/matchLetters";
 
 // This can be changed to alter the difficulty of the game!
 const numOfGuesses = 6;
-const metaWord = "hollow";
-
-// console.log(matchLetters(metaWord, "kitvip"));
 
 // This is important
-const guesses = [];
-let i = 0;
-while (i < numOfGuesses) {
-  guesses.push("");
-  i++;
+function makeArrayWithBlankString(num) {
+  const guesses = [];
+  let i = 0;
+  while (i < num) {
+    guesses.push("");
+    i++;
+  }
+  return guesses;
+}
+
+function getRandomFromArray(arr) {
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
 }
 
 export default function GameBox(props) {
 
   const [ guessEnum, setGuessEnum ] = useState(0);
-  const [ allGuesses, setAllGuesses ] = useState(guesses);
+  const [allGuesses, setAllGuesses] = useState(makeArrayWithBlankString(numOfGuesses));
   const [ matched, setMatched ] = useState([]);
+  const [ metaWord, setMetaWord ] = useState("vikram");
+  // TODO: loading component
+  // const [ loading, setLoading ] = useState(true);
+
+  useEffect(() => {
+
+    // TODO: Implement client side caching
+    const pathToWordFile = `assets/words/${props.numLetters}_letter_words.txt`;
+
+    fetch(pathToWordFile)
+      .then(res => res.text())
+      .then(data => {
+        const wordsList = data.split(/\r?\n/);
+        const randomWord = getRandomFromArray(wordsList);
+        setMetaWord(randomWord);
+        // sneek peek
+        // console.log(randomWord);
+      })
+      .catch(err => console.error(err));
+
+  }, [props.numLetters]);
 
   useEffect(() => {
 
@@ -89,10 +115,10 @@ export default function GameBox(props) {
       // console.log("cleaning up...");
       document.removeEventListener("keydown", makeWord);
     }
-  }, [props.numLetters, allGuesses, guessEnum]);
+  }, [props.numLetters, allGuesses, guessEnum, metaWord]);
 
   // console.log("allGuesses state:", allGuesses);
-  console.log("matched state:", matched);
+  // console.log("matched state:", matched);
 
   // The guess-row, we have 6 of them!
   const GuessRow = (props) => {
