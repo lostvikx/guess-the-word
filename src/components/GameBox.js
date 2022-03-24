@@ -26,6 +26,7 @@ export default function GameBox(props) {
   const [allGuesses, setAllGuesses] = useState(makeArrayWithBlankString(numOfGuesses));
   const [ matched, setMatched ] = useState([]);
   const [ metaWord, setMetaWord ] = useState("vikram");
+  const [ win, setWin ] = useState(false);
   // TODO: loading component
   // const [ loading, setLoading ] = useState(true);
 
@@ -41,7 +42,7 @@ export default function GameBox(props) {
         const randomWord = getRandomFromArray(wordsList);
         setMetaWord(randomWord);
         // sneek peek
-        // console.log(randomWord);
+        console.log(randomWord);
       })
       .catch(err => console.error(err));
 
@@ -53,7 +54,7 @@ export default function GameBox(props) {
     const makeWord = (event) => {
 
       // conditions
-      const hasChance = guessEnum < numOfGuesses;
+      const hasChance = guessEnum < numOfGuesses && !win;
       const keyIsChar = hasChance && event.keyCode >= 65 && event.keyCode <= 90;
       const keyIsDel = hasChance && (event.keyCode === 8 || event.keyCode === 46);
       const keyIsEnter = hasChance && event.keyCode === 13;
@@ -107,23 +108,36 @@ export default function GameBox(props) {
         }
 
       }
+      
     }
 
     document.addEventListener("keydown", makeWord);
+
+    if (!win) {
+      for (const match of matched) {
+        if (match.exact.length === props.numLetters) {
+          console.log("Winner!");
+          setWin(true);
+          break;
+        }
+      }
+    }
+
     // Clean-up function
     return () => {
       // console.log("cleaning up...");
       document.removeEventListener("keydown", makeWord);
     }
-  }, [props.numLetters, allGuesses, guessEnum, metaWord]);
+  }, [props.numLetters, allGuesses, guessEnum, metaWord, win, matched]);
 
   // console.log("allGuesses state:", allGuesses);
-  // console.log("matched state:", matched);
+  console.log("matched state:", matched);
 
   // The guess-row, we have 6 of them!
   const GuessRow = (props) => {
 
     const matchedObj = props.matchLetters ? props.matchLetters : null;
+
     // matchedObj && console.log("matched object", matchedObj);
 
     // All boxes get mapped into a game-row
