@@ -4,7 +4,7 @@ import GameBox from "./components/GameBox";
 export default function Main(props) {
 
   // console.log(props.numLetters);
-  document.title = `${props.numLetters} Letters Challenge | Guess The Word`;
+  document.title = `${props.numLetters} Letters Challenge | GuessTheWord`;
 
   return (
     <div>

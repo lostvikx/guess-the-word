@@ -6,7 +6,7 @@ import SelectNumLetters from "./components/SelectNumLetters";
 export default function App() {
 
   const [ numLetters, setNumLetters ] = useState(null);
-  document.title = "GuessTheWord";
+  document.title = "Home | GuessTheWord";
 
   // console.log("numLetters state:", numLetters);
 

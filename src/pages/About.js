@@ -3,7 +3,7 @@ import Header from "../components/Header";
 
 export default function About() {
 
-  document.title = document.title + " | About";
+  document.title = "About | GuessTheWord";
 
   return (
     <div>
