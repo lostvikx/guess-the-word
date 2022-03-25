@@ -143,7 +143,7 @@ export default function GameBox(props) {
     // All boxes get mapped into a game-row
     const boxes = [];
 
-    for (let i = 0; i <props.numLetters; i++) {
+    for (let i = 0; i < props.numLetters; i++) {
 
       const letter = props.word[i];
 
@@ -159,10 +159,13 @@ export default function GameBox(props) {
 
       }
 
+      const boxStyle = letter ? {borderColor: "black"} : {};
+
       boxes.push(
         <div
           className={className}
           key={i}
+          style={boxStyle}
         >
           {letter}
         </div>

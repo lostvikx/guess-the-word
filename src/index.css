@@ -1,5 +1,6 @@
 :root {
   --link: rgb(58, 58, 245);
+  --grey: grey;
 }
 
 *, *::before, *::after {
@@ -55,9 +56,9 @@ a {
 }
 
 .box {
-  border: 1px solid black;
-  min-width: 35px;
-  min-height: 35px;
+  border: 1px solid var(--grey);
+  min-width: 37.5px;
+  min-height: 37.5px;
   aspect-ratio: 1;
   text-align: center;
   text-transform: uppercase;
