@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Header(props) {
 
   // Object.keys(props).length ? console.log(props) : console.log("no props");
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+
+    function watchWidth() {
+      setWindowWidth(window.innerWidth);
+    }
+
+    window.addEventListener("resize", watchWidth);
+
+    return () => {
+      window.removeEventListener("resize", watchWidth);
+    }
+
+  }, [windowWidth]);
+
+  const isMobile = windowWidth < 500;
 
   return (
     <nav className="nav-bar">
@@ -17,7 +35,7 @@ export default function Header(props) {
               ⬅ Back
             </div>
           : <div className="logo">
-              <Link to="/">GuessTheWord</Link>
+            <Link to="/">{isMobile ? "🧁" : "GuessTheWord"}</Link>
             </div>
       }
       
