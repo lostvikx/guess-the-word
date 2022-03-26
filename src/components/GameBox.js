@@ -48,7 +48,7 @@ export default function GameBox(props) {
       })
       .catch(err => console.error(err));
 
-  }, []);
+  }, [props.numLetters]);
 
   // console.log(wordsList);
 
@@ -139,7 +139,7 @@ export default function GameBox(props) {
   }, [props.numLetters, allGuesses, guessEnum, metaWord, win, matched, wordsList]);
 
   // console.log("allGuesses state:", allGuesses);
-  wordsList.includes(allGuesses[guessEnum]) && console.log(allGuesses[guessEnum]);
+  // wordsList.includes(allGuesses[guessEnum]) && console.log(allGuesses[guessEnum]);
   // console.log(guessEnum);
   // console.log("matched state:", matched);
 
