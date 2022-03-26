@@ -38,7 +38,7 @@ a {
 }
 
 .game-box {
-  margin: 0 1rem;
+  margin: 2rem 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -113,4 +113,16 @@ h1 {
   font-weight: 500;
   margin: 1rem;
   font-size: 1.75rem;
+}
+
+.notification {
+  position: absolute;
+  left: 50%;
+  /* top: 13%; */
+  transform: translate(-50%, 0%);
+  background-color: orange;
+  padding: 0.5em 0.75em;
+  border-radius: 5px;
+  font-size: 1rem;
+  /* visibility: hidden; */
 }
