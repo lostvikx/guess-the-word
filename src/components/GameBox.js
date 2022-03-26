@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import matchLetters from "../helper/matchLetters";
+import Notification from "./Notification";
 
 // This can be changed to alter the difficulty of the game!
 const numOfGuesses = 6;
@@ -26,8 +27,9 @@ export default function GameBox(props) {
   const [allGuesses, setAllGuesses] = useState(makeArrayWithBlankString(numOfGuesses));
   const [ matched, setMatched ] = useState([]);
   const [ wordsList, setWordsList ] = useState([]);
-  const [ metaWord, setMetaWord ] = useState("vikram");
+  const [ metaWord, setMetaWord ] = useState("");
   const [ win, setWin ] = useState(false);
+  const [ wrongWordNotify, setWrongWordNotify ] = useState(false);
   // TODO: loading component
   // const [ loading, setLoading ] = useState(true);
 
@@ -112,7 +114,11 @@ export default function GameBox(props) {
           });
 
         } else {
-          console.log("word not legal!");
+          console.log("word is illegal");
+          setWrongWordNotify(true);
+          setTimeout(() => {
+            setWrongWordNotify(false);
+          }, 2000);
         }
 
       }
@@ -136,7 +142,7 @@ export default function GameBox(props) {
       // console.log("cleaning up...");
       document.removeEventListener("keydown", makeWord);
     }
-  }, [props.numLetters, allGuesses, guessEnum, metaWord, win, matched, wordsList]);
+  }, [props.numLetters, allGuesses, guessEnum, metaWord, win, matched, wordsList, wrongWordNotify]);
 
   // console.log("allGuesses state:", allGuesses);
   // wordsList.includes(allGuesses[guessEnum]) && console.log(allGuesses[guessEnum]);
@@ -200,9 +206,14 @@ export default function GameBox(props) {
     );
   });
 
+  console.log("should nofity:", wrongWordNotify);
+
   return (
-    <div className="game-box">
-      { allGuessRows }
+    <div>
+      { wrongWordNotify && <Notification message="Bad Word" type="warn" /> }
+      <div className="game-box">
+        { allGuessRows }
+      </div>
     </div>
   );
 }
