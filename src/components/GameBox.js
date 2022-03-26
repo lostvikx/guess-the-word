@@ -25,6 +25,7 @@ export default function GameBox(props) {
   const [ guessEnum, setGuessEnum ] = useState(0);
   const [allGuesses, setAllGuesses] = useState(makeArrayWithBlankString(numOfGuesses));
   const [ matched, setMatched ] = useState([]);
+  const [ wordsList, setWordsList ] = useState([]);
   const [ metaWord, setMetaWord ] = useState("vikram");
   const [ win, setWin ] = useState(false);
   // TODO: loading component
@@ -38,15 +39,18 @@ export default function GameBox(props) {
     fetch(pathToWordFile)
       .then(res => res.text())
       .then(data => {
-        const wordsList = data.split(/\r?\n/);
-        const randomWord = getRandomFromArray(wordsList);
+        const allWords = data.split(/\r?\n/).filter(word => word.length !== 0);
+        const randomWord = getRandomFromArray(allWords);
+        setWordsList(allWords);
         setMetaWord(randomWord);
         // sneek peek
         console.log(randomWord);
       })
       .catch(err => console.error(err));
 
-  }, [props.numLetters]);
+  }, []);
+
+  // console.log(wordsList);
 
   useEffect(() => {
 
@@ -89,22 +93,26 @@ export default function GameBox(props) {
 
       }
 
-      // guess made
+      // guess made and word is in the wordList
       if (keyIsEnter) {
 
         const guessWord = allGuesses[guessEnum];
+        const isLegalWord = wordsList.includes(allGuesses[guessEnum]);
 
         // guess string length === numLetters
-        if (guessWord.length === props.numLetters) {
+        if (guessWord.length === props.numLetters && isLegalWord) {
           // console.log("Enter!");
           setGuessEnum(prevGuessEnum => prevGuessEnum + 1);
 
           setMatched(prevMatched => {
             const newMatched = [...prevMatched];
             newMatched[guessEnum] = matchLetters(metaWord, guessWord);
+            console.log(newMatched);
             return newMatched;
           });
 
+        } else {
+          console.log("word not legal!");
         }
 
       }
@@ -128,9 +136,11 @@ export default function GameBox(props) {
       // console.log("cleaning up...");
       document.removeEventListener("keydown", makeWord);
     }
-  }, [props.numLetters, allGuesses, guessEnum, metaWord, win, matched]);
+  }, [props.numLetters, allGuesses, guessEnum, metaWord, win, matched, wordsList]);
 
   // console.log("allGuesses state:", allGuesses);
+  wordsList.includes(allGuesses[guessEnum]) && console.log(allGuesses[guessEnum]);
+  // console.log(guessEnum);
   // console.log("matched state:", matched);
 
   // The guess-row, we have 6 of them!
