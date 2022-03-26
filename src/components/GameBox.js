@@ -35,6 +35,7 @@ export default function GameBox(props) {
   const [ wordsList, setWordsList ] = useState([]);
   const [ metaWord, setMetaWord ] = useState("");
   const [ win, setWin ] = useState(false);
+  const [ isBadWord, setIsBadWord ] = useState(false);
   
   // TODO: loading component
   // const [ loading, setLoading ] = useState(true);
@@ -93,6 +94,7 @@ export default function GameBox(props) {
           // guess string length > 0
           if (newAllGuessesArr[guessEnum].length > 0) {
             newAllGuessesArr[guessEnum] = newAllGuessesArr[guessEnum].slice(0, -1);
+            setIsBadWord(false);
             return newAllGuessesArr;
           } else {
             return prevAllGuesses;
@@ -113,14 +115,17 @@ export default function GameBox(props) {
           if (isLegalWord) {
             setGuessEnum(prevGuessEnum => prevGuessEnum + 1);
 
+            setIsBadWord(false);
+
             setMatched(prevMatched => {
               const newMatched = [...prevMatched];
               newMatched[guessEnum] = matchLetters(metaWord, guessWord);
-              console.log("matched state:", newMatched);
+              // console.log("matched state:", newMatched);
               return newMatched;
             });
           } else {
             console.log("word is illegal");
+            setIsBadWord(true);
           }
 
         }
@@ -160,10 +165,9 @@ export default function GameBox(props) {
     const matchedObj = props.matchLetters ? props.matchLetters : null;
 
     // matchedObj && console.log("matched object", matchedObj);
-    // badWord.length === props.numLetters && console.log(badWord);
 
     const inWordsList = wordsList.includes(word);
-    word.length === props.numLetters && console.log(inWordsList);
+    // word.length === props.numLetters && console.log(inWordsList);
 
     // All boxes get mapped into a game-row
     const boxes = [];
@@ -191,8 +195,12 @@ export default function GameBox(props) {
         boxStyle = { borderColor: "black" };
       }
 
-      if (word.length === props.numLetters && !inWordsList) {
+      if (word.length === props.numLetters && !inWordsList && props.isBadWord) {
         boxStyle = { borderColor: "red" };
+      }
+
+      if (win && metaWord === word) {
+        boxStyle = { borderColor: "var(--link)" };
       }
 
       boxes.push(
@@ -223,6 +231,7 @@ export default function GameBox(props) {
         word={guess}
         key={i}
         matchLetters={matched[i] || null}
+        isBadWord={isBadWord}
       />
     );
   });
