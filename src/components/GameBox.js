@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from "react";
 import matchLetters from "../helper/matchLetters";
-import Notification from "./Notification";
 
 // This can be changed to alter the difficulty of the game!
 const numOfGuesses = 6;
 
 // This is important
 function makeArrayWithBlankString(num) {
-  const guesses = [];
+  const arr = [];
   let i = 0;
   while (i < num) {
-    guesses.push("");
+    arr.push("");
     i++;
   }
-  return guesses;
+  return arr;
 }
+
+// type = ["warn", "success"]
+// function notifyUser(type, timeout=2000) {
+//   const warnNoti = document.getElementById(type);
+//   warnNoti.style.visibility = "visible";
+//   setTimeout(() => warnNoti.style.visibility = "hidden", timeout);
+// }
 
 function getRandomFromArray(arr) {
   const randomIndex = Math.floor(Math.random() * arr.length);
@@ -29,7 +35,7 @@ export default function GameBox(props) {
   const [ wordsList, setWordsList ] = useState([]);
   const [ metaWord, setMetaWord ] = useState("");
   const [ win, setWin ] = useState(false);
-  const [ wrongWordNotify, setWrongWordNotify ] = useState(false);
+  
   // TODO: loading component
   // const [ loading, setLoading ] = useState(true);
 
@@ -102,23 +108,21 @@ export default function GameBox(props) {
         const isLegalWord = wordsList.includes(allGuesses[guessEnum]);
 
         // guess string length === numLetters
-        if (guessWord.length === props.numLetters && isLegalWord) {
+        if (guessWord.length === props.numLetters) {
           // console.log("Enter!");
-          setGuessEnum(prevGuessEnum => prevGuessEnum + 1);
+          if (isLegalWord) {
+            setGuessEnum(prevGuessEnum => prevGuessEnum + 1);
 
-          setMatched(prevMatched => {
-            const newMatched = [...prevMatched];
-            newMatched[guessEnum] = matchLetters(metaWord, guessWord);
-            console.log(newMatched);
-            return newMatched;
-          });
+            setMatched(prevMatched => {
+              const newMatched = [...prevMatched];
+              newMatched[guessEnum] = matchLetters(metaWord, guessWord);
+              console.log("matched state:", newMatched);
+              return newMatched;
+            });
+          } else {
+            console.log("word is illegal");
+          }
 
-        } else {
-          console.log("word is illegal");
-          setWrongWordNotify(true);
-          setTimeout(() => {
-            setWrongWordNotify(false);
-          }, 2000);
         }
 
       }
@@ -142,7 +146,7 @@ export default function GameBox(props) {
       // console.log("cleaning up...");
       document.removeEventListener("keydown", makeWord);
     }
-  }, [props.numLetters, allGuesses, guessEnum, metaWord, win, matched, wordsList, wrongWordNotify]);
+  }, [props.numLetters, allGuesses, guessEnum, metaWord, win, matched, wordsList]);
 
   // console.log("allGuesses state:", allGuesses);
   // wordsList.includes(allGuesses[guessEnum]) && console.log(allGuesses[guessEnum]);
@@ -152,30 +156,44 @@ export default function GameBox(props) {
   // The guess-row, we have 6 of them!
   const GuessRow = (props) => {
 
+    const word = props.word;
     const matchedObj = props.matchLetters ? props.matchLetters : null;
 
     // matchedObj && console.log("matched object", matchedObj);
+    // badWord.length === props.numLetters && console.log(badWord);
+
+    const inWordsList = wordsList.includes(word);
+    word.length === props.numLetters && console.log(inWordsList);
 
     // All boxes get mapped into a game-row
     const boxes = [];
 
     for (let i = 0; i < props.numLetters; i++) {
 
-      const letter = props.word[i];
-
-      let className = "box";
+      const letter = word[i];
+      let className = "box"
 
       if (matchedObj) {
 
         if (matchedObj.exact.includes(i)) {
           className = "box exact-match";
-        } else if (matchedObj.contains.includes(i)) {
+        } 
+        // change to else if (on error)
+        if (matchedObj.contains.includes(i)) {
           className = "box contains-match";
         }
 
       }
 
-      const boxStyle = letter ? {borderColor: "black"} : {};
+      let boxStyle = {};
+
+      if (letter) {
+        boxStyle = { borderColor: "black" };
+      }
+
+      if (word.length === props.numLetters && !inWordsList) {
+        boxStyle = { borderColor: "red" };
+      }
 
       boxes.push(
         <div
@@ -186,6 +204,7 @@ export default function GameBox(props) {
           {letter}
         </div>
       );
+
     }
 
     return (
@@ -193,9 +212,11 @@ export default function GameBox(props) {
         {boxes}
       </div>
     );
+
   }
 
   const allGuessRows = allGuesses.map((guess, i) => {
+
     return (
       <GuessRow
         numLetters={props.numLetters}
@@ -206,14 +227,9 @@ export default function GameBox(props) {
     );
   });
 
-  console.log("should nofity:", wrongWordNotify);
-
   return (
-    <div>
-      { wrongWordNotify && <Notification message="Bad Word" type="warn" /> }
-      <div className="game-box">
-        { allGuessRows }
-      </div>
+    <div className="game-box">
+      { allGuessRows }
     </div>
   );
 }

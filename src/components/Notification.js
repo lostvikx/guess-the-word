@@ -1,10 +1,8 @@
 import React from "react";
 
-export default function Notification(props) {
-
-  
+export default function Notification(props) {  
 
   return (
-    <div className="notification">{props.message}</div>
+    <div id={props.type} className="notification">{props.message}</div>
   );
 }
