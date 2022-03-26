@@ -4,7 +4,6 @@ import matchLetters from "../helper/matchLetters";
 // This can be changed to alter the difficulty of the game!
 const numOfGuesses = 6;
 
-// This is important
 function makeArrayWithBlankString(num) {
   const arr = [];
   let i = 0;
@@ -15,13 +14,6 @@ function makeArrayWithBlankString(num) {
   return arr;
 }
 
-// type = ["warn", "success"]
-// function notifyUser(type, timeout=2000) {
-//   const warnNoti = document.getElementById(type);
-//   warnNoti.style.visibility = "visible";
-//   setTimeout(() => warnNoti.style.visibility = "hidden", timeout);
-// }
-
 function getRandomFromArray(arr) {
   const randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex];
@@ -29,13 +21,13 @@ function getRandomFromArray(arr) {
 
 export default function GameBox(props) {
 
-  const [ guessEnum, setGuessEnum ] = useState(0);
-  const [allGuesses, setAllGuesses] = useState(makeArrayWithBlankString(numOfGuesses));
-  const [ matched, setMatched ] = useState([]);
-  const [ wordsList, setWordsList ] = useState([]);
-  const [ metaWord, setMetaWord ] = useState("");
-  const [ win, setWin ] = useState(false);
-  const [ isBadWord, setIsBadWord ] = useState(false);
+  const [guessEnum, setGuessEnum] = useState(0);
+  const [allGuesses, setAllGuesses] = useState(makeArrayWithBlankString(numOfGuesses)); // [string]
+  const [matched, setMatched] = useState([]); // [{exact, contains}]
+  const [wordsList, setWordsList] = useState([]); // array of words
+  const [metaWord, setMetaWord] = useState("");
+  const [win, setWin] = useState(false);
+  const [isBadWord, setIsBadWord] = useState(false);
   
   // TODO: loading component
   // const [ loading, setLoading ] = useState(true);
@@ -48,8 +40,12 @@ export default function GameBox(props) {
     fetch(pathToWordFile)
       .then(res => res.text())
       .then(data => {
-        const allWords = data.split(/\r?\n/).filter(word => word.length !== 0);
+        const allWords = data
+          .split(/\r?\n/)
+          .filter(word => word.length !== 0);
+          
         const randomWord = getRandomFromArray(allWords);
+
         setWordsList(allWords);
         setMetaWord(randomWord);
         // sneek peek
@@ -58,8 +54,6 @@ export default function GameBox(props) {
       .catch(err => console.error(err));
 
   }, [props.numLetters]);
-
-  // console.log(wordsList);
 
   useEffect(() => {
 
@@ -103,10 +97,11 @@ export default function GameBox(props) {
 
       }
 
-      // guess made and word is in the wordList
       if (keyIsEnter) {
 
         const guessWord = allGuesses[guessEnum];
+
+        // check word is in the wordList
         const isLegalWord = wordsList.includes(allGuesses[guessEnum]);
 
         // guess string length === numLetters
@@ -115,6 +110,7 @@ export default function GameBox(props) {
           if (isLegalWord) {
             setGuessEnum(prevGuessEnum => prevGuessEnum + 1);
 
+            // correct word
             setIsBadWord(false);
 
             setMatched(prevMatched => {
@@ -125,6 +121,7 @@ export default function GameBox(props) {
             });
           } else {
             console.log("word is illegal");
+            // current guess is long enough, but is not a legal word
             setIsBadWord(true);
           }
 
@@ -164,7 +161,7 @@ export default function GameBox(props) {
     const word = props.word;
     const matchedObj = props.matchLetters ? props.matchLetters : null;
 
-    // matchedObj && console.log("matched object", matchedObj);
+    // console.log("matched object", matchedObj);
 
     const inWordsList = wordsList.includes(word);
     // word.length === props.numLetters && console.log(inWordsList);
@@ -175,20 +172,19 @@ export default function GameBox(props) {
     for (let i = 0; i < props.numLetters; i++) {
 
       const letter = word[i];
-      let className = "box"
+      let className = "box";
 
       if (matchedObj) {
 
         if (matchedObj.exact.includes(i)) {
           className = "box exact-match";
-        } 
-        // change to else if (on error)
-        if (matchedObj.contains.includes(i)) {
+        } else if (matchedObj.contains.includes(i)) {
           className = "box contains-match";
         }
 
       }
 
+      // styling the input box
       let boxStyle = {};
 
       if (letter) {
