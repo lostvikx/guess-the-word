@@ -119,3 +119,30 @@ h1 {
   font-weight: 500;
   cursor: pointer;
 }
+
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.upperline, .middleline, .lowerline {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.25em;
+}
+
+.key {
+  background-color: gainsboro;
+  padding: 0.5em;
+  min-width: 20px;
+  min-height: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}

@@ -20,14 +20,14 @@ export default function App() {
 
       {
         numLetters === null
-          ? <div>
+          ? <>
               <Header />
               <SelectNumLetters handleClick={handleClick} />
-            </div>
-          : <div>
+            </>
+          : <>
               <Header handleClick={handleClick} />
               <Main numLetters={numLetters} handleClick={handleClick} />
-            </div>
+            </>
       }
 
     </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import matchLetters from "../helper/matchLetters";
+import Keyboard from "./Keyboard";
 
 // This can be changed to alter the difficulty of the game!
 const numOfGuesses = 6;
@@ -235,6 +236,7 @@ export default function GameBox(props) {
   return (
     <div className="game-box">
       { allGuessRows }
+      <Keyboard allGuesses={allGuesses} />
     </div>
   );
 }
