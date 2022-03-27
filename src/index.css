@@ -14,7 +14,7 @@
 /* common */
 body {
   font-family: 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
-  max-width: 1100px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -177,7 +177,7 @@ h1 {
 }
 
 /* about section */
-section {
+section, footer {
   margin: 1rem;
 }
 
@@ -205,4 +205,19 @@ img {
 
 strong {
   font-weight: 550;
+}
+
+footer p {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+footer {
+  justify-self: flex-end;
 }

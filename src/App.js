@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "./components/Header";
 import Main from "./Main";
 import SelectNumLetters from "./components/SelectNumLetters";
+import Footer from "./components/Footer";
 
 export default function App() {
 
@@ -21,16 +22,16 @@ export default function App() {
       <div className="container">
         {
           numLetters === null
-            ? <>
+            ? <div>
               <Header />
               <SelectNumLetters handleClick={handleClick} />
-            </>
-            : <>
+            </div>
+            : <div>
               <Header handleClick={handleClick} />
               <Main numLetters={numLetters} handleClick={handleClick} />
-            </>
+            </div>
         }
-        {/* <Footer /> */}
+        <Footer />
       </div>
     );
   }

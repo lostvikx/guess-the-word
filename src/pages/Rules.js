@@ -4,12 +4,14 @@ import exactMatchExample from "./img/gifts.png";
 import guessMatchExample from "./img/contain-match.png";
 import guessNoMatchExample from "./img/none-match.png";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
 export default function Rules() {
 
   document.title = "Rules | GuessTheWord";
 
   return (
+    <div className="container">
     <div>
       <Header />
       <h1>Do you think you can beat the game?</h1>
@@ -30,6 +32,8 @@ export default function Rules() {
           <Link className="play-btn" to="/play">Play</Link>
         </p>
       </section>
+    </div>
+    <Footer />
     </div>
   );
 }
