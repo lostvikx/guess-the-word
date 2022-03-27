@@ -30,6 +30,7 @@ export default function App() {
               <Main numLetters={numLetters} handleClick={handleClick} />
             </>
         }
+        {/* <Footer /> */}
       </div>
     );
   }
