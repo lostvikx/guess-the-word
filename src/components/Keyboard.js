@@ -39,19 +39,18 @@ export default function Keyboard(props) {
 
   const [letters, setLetters] = useState({
     all: [],
-    duds: [],
     exact: [],
     contains: []
   });
 
   const i = props.i - 1;
   const guess = props.allGuesses[i];
-  console.log(guess);
+  // console.log(guess);
 
   // console.log(props.matched, i);
 
   if (props.matched.length && props.matched[i]) {
-    
+
     // console.log(i, props.matched[i]);
     // console.log("exact match:", props.matched[i].exact);
     // console.log("contains match:", props.matched[i].contains);
@@ -64,7 +63,6 @@ export default function Keyboard(props) {
       if(isNewLetter) {
         setLetters(prevLetters => {
           const newLetters = { ...prevLetters };
-          newLetters.all.push(guess[index]);
           newLetters.exact.push(guess[index]);
           return newLetters;
         });
@@ -90,7 +88,6 @@ export default function Keyboard(props) {
       if(isNewLetter) {
         setLetters(prevLetters => {
           const newLetters = { ...prevLetters };
-          newLetters.all.push(guess[index]);
           newLetters.contains.push(guess[index]);
           return newLetters;
         });
@@ -98,13 +95,12 @@ export default function Keyboard(props) {
     }
 
     for (const letter of guess) {
-      const isNewLetter = !letters.all.includes(letter);
+      const isNewLetter = !letters.all.includes(letter) && !letters.exact.includes(letter) && !letters.contains.includes(letter);
 
       if (isNewLetter) {
         setLetters(prevLetters => {
           const newLetters = { ...prevLetters };
           newLetters.all.push(letter);
-          newLetters.duds.push(letter);
           return newLetters;
         });
       }
@@ -113,11 +109,11 @@ export default function Keyboard(props) {
 
   }
 
-  console.log(letters);
+  // console.log(letters);
 
-  const upperLine = createKeyDivs("qwertyuiop", props.onClick);
-  const middleLine = createKeyDivs("asdfghjkl", props.onClick);
-  const lowerLine = createKeyDivs("zxcvbnm", props.onClick);
+  const upperLine = createKeyDivs("qwertyuiop", props.onClick, letters);
+  const middleLine = createKeyDivs("asdfghjkl", props.onClick, letters);
+  const lowerLine = createKeyDivs("zxcvbnm", props.onClick, letters);
 
   return (
     <div className="keyboard">
