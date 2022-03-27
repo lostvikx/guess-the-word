@@ -32,7 +32,7 @@ function createKeyDivs(keysString, handleClick, lettersObj) {
   } else {
     const keys = keysString.split("").map((letter, i) => {
 
-      const className = ["key", "char-key"];
+      const className = ["key"];
 
       if (lettersObj.exact.includes(letter)) {
         className.push("exact-match");
