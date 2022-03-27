@@ -1,15 +1,26 @@
 import React, { useState } from "react";
 
-function createKeyDivs(keysString, handleClick) {
+function createKeyDivs(keysString, handleClick, lettersObj) {
 
   const isLastLine = keysString.startsWith("z");
 
   if (isLastLine) {
     const keys = ["enter"].concat(keysString.split("")).concat("<=").map((letter, i) => {
+
+      const className = ["key"];
+
+      if (lettersObj.exact.includes(letter)) {
+        className.push("exact-match");
+      } else if (lettersObj.contains.includes(letter)) {
+        className.push("contains-match");
+      } else if (lettersObj.all.includes(letter)) {
+        className.push("dud-match");
+      }
+
       return (
         <div 
           key={i} 
-          className="key" 
+          className={className.join(" ")} 
           onClick={handleClick} 
           value={letter}
         >
@@ -20,10 +31,21 @@ function createKeyDivs(keysString, handleClick) {
     return keys;
   } else {
     const keys = keysString.split("").map((letter, i) => {
+
+      const className = ["key", "char-key"];
+
+      if (lettersObj.exact.includes(letter)) {
+        className.push("exact-match");
+      } else if (lettersObj.contains.includes(letter)) {
+        className.push("contains-match");
+      } else if (lettersObj.all.includes(letter)) {
+        className.push("dud-match");
+      }
+
       return (
         <div 
           key={i} 
-          className="key char-key" 
+          className={className.join(" ")} 
           onClick={handleClick} 
           value={letter}
         >
@@ -69,7 +91,7 @@ export default function Keyboard(props) {
       }
 
       if (isInContains) {
-        console.log("was in contains");
+        // console.log("was in contains");
         setLetters(prevLetters => {
           const newLetters = { ...prevLetters };
           newLetters.contains = newLetters.contains.filter(letter => letter !== guess[index]);

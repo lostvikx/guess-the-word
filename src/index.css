@@ -1,6 +1,8 @@
 :root {
   --link: rgb(58, 58, 245);
   --grey: gainsboro;
+  --green: rgb(145, 231, 59);
+  --yellow: rgb(238, 224, 101);
 }
 
 *, *::before, *::after {
@@ -88,15 +90,7 @@ h1 {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-}
-
-/* utils */
-.exact-match {
-  background-color: chartreuse;
-}
-
-.contains-match {
-  background-color: khaki;
+  user-select: none;
 }
 
 /* index page */
@@ -155,3 +149,15 @@ h1 {
   height: 35px;
 } */
 
+/* utils */
+.exact-match {
+  background-color: var(--green);
+}
+
+.contains-match {
+  background-color: var(--yellow);
+}
+
+.dud-match {
+  background-color: ivory;
+}
