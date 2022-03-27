@@ -126,6 +126,9 @@ export default function GameBox(props) {
             setIsBadWord(true);
           }
 
+        } else {
+          console.log("word not long enough");
+          setIsBadWord(true);
         }
 
       }
@@ -198,6 +201,10 @@ export default function GameBox(props) {
 
       if (win && metaWord === word) {
         boxStyle = { borderColor: "var(--link)" };
+      }
+
+      if (props.isBadWord && word.length < props.numLetters && !inWordsList && word.length) {
+        boxStyle = { borderColor: "red" };
       }
 
       boxes.push(
