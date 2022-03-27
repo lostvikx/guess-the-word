@@ -161,3 +161,30 @@ h1 {
 .dud-match {
   background-color: ivory;
 }
+
+/* about section */
+.about-section {
+  margin: 1rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 0.5rem 0;
+}
+
+p {
+  font-size: 0.875rem;
+  padding: 0.25em 0;
+  line-height: 1.4;
+}
+
+hr {
+  margin: 1rem;
+  opacity: 40%;
+}
+
+img {
+  display: block;
+  margin: 0.5rem 0;
+}
