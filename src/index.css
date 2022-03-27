@@ -107,7 +107,6 @@ h1 {
 .letter-num-selection-btn {
   padding: 1em;
   outline: none;
-  background-color: rgb(243, 243, 169);
   border: none;
   font-size: 1.25rem;
   font-weight: 500;
@@ -133,7 +132,7 @@ h1 {
 }
 
 .key {
-  background-color: gainsboro;
+  background-color: var(--grey);
   padding: 0.7em;
   display: flex;
   align-items: center;
@@ -143,11 +142,6 @@ h1 {
   cursor: pointer;
   user-select: none;
 }
-
-/* .char-key {
-  width: 35px;
-  height: 35px;
-} */
 
 /* utils */
 .exact-match {

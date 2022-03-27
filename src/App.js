@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import Header from "./components/Header";
 import Main from "./Main";
+import Rules from "./pages/Rules";
 import SelectNumLetters from "./components/SelectNumLetters";
+import { Navigate } from "react-router";
 
 export default function App() {
+
+  const shouldRedirect = true;
 
   const [ numLetters, setNumLetters ] = useState(null);
   document.title = "Home | GuessTheWord";
@@ -15,21 +19,29 @@ export default function App() {
     numLetters ? setNumLetters(null) : setNumLetters(num);
   }
 
-  return (
-    <div className="container">
-
-      {
-        numLetters === null
-          ? <>
+  function Home() {
+    return (
+      <div className="container">
+        {
+          numLetters === null
+            ? <>
               <Header />
               <SelectNumLetters handleClick={handleClick} />
             </>
-          : <>
+            : <>
               <Header handleClick={handleClick} />
               <Main numLetters={numLetters} handleClick={handleClick} />
             </>
-      }
+        }
+      </div>
+    );
+  }
 
-    </div>
+  return (
+    // shouldRedirect ? <Rules /> : <Home />
+    <>
+      <Home />
+      {shouldRedirect && <Navigate replace to="/rules"/>}
+    </>
   );
 }
