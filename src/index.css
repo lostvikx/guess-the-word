@@ -105,12 +105,32 @@ h1 {
 }
 
 .letter-num-selection-btn {
-  padding: 1em;
+  padding: 0.75em 1.5em;
+  background-color: #c8bbfd;
   outline: none;
   border: none;
   font-size: 1.25rem;
   font-weight: 500;
   cursor: pointer;
+  border-radius: 5px;
+}
+
+.play {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.play-btn {
+  display: inline-block;
+  color: black;
+  padding: 0.65em 2.5em;
+  text-align: center;
+  background-color: #c8bbfd;
+  font-size: 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 5px;
+  text-transform: uppercase;
 }
 
 .keyboard {
@@ -174,8 +194,8 @@ p {
 }
 
 hr {
-  margin: 1rem;
-  opacity: 40%;
+  margin: 1rem 2rem;
+  opacity: 30%;
 }
 
 img {

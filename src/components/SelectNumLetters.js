@@ -45,7 +45,7 @@ export default function SelectNumLetters(props) {
 
   return (
     <div>
-      <h1>Select Difficulty:</h1>
+      <h1>Select Difficulty</h1>
       <section>
         <p>Note: You get n amount of guesses in n letters difficulty. Meaning that if you selected the <strong>"5 Letters"</strong> difficulty, then you get <strong>5 Guesses</strong> to find the answer.</p>
       </section>

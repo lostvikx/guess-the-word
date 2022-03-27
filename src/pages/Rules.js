@@ -1,7 +1,9 @@
 import React from "react";
 import Header from "../components/Header";
-import guessMatchExample from "./img/example.png";
+import exactMatchExample from "./img/gifts.png";
+import guessMatchExample from "./img/contain-match.png";
 import guessNoMatchExample from "./img/none-match.png";
+import { Link } from "react-router-dom";
 
 export default function Rules() {
 
@@ -18,11 +20,15 @@ export default function Rules() {
         <p>After each guess, the color of the tiles will show how close the guess was to the actual word.</p>
         <hr />
         <h2>Examples:</h2>
-        <img src={guessMatchExample} alt="guess match example" />
+        <img src={exactMatchExample} alt="guess match example" />
         <p>The letter <strong>C</strong> is in the word and in the correct spot.</p>
-        <p>The letter <strong>O</strong> is in the word, but in is the wrong spot.</p>
+        <img src={guessMatchExample} alt="guess match example" />
+        <p>The letter <strong>A</strong> and <strong>E</strong> are in the word, but in the wrong spots.</p>
         <img src={guessNoMatchExample} alt="no guess match example" />
         <p>None of the letters in the above guess are is the word.</p>
+        <p className="play">
+          <Link className="play-btn" to="/play">Play</Link>
+        </p>
       </section>
     </div>
   );

@@ -35,12 +35,12 @@ export default function Header(props) {
               ⬅ Back
             </div>
           : <div className="logo">
-            <Link to="/">{isMobile ? "🧁" : "🧁 GuessTheWord"}</Link>
+            <Link to="/play">{isMobile ? "🧁" : "🧁 GuessTheWord"}</Link>
             </div>
       }
       
       <ul className="nav-links">
-        <li><Link to="/rules">Rules</Link></li>
+        <li><Link to="/">Rules</Link></li>
         <li>
           <a href="https://github.com/lostvikx/guess-the-word" target="_blank" rel="noreferrer">GitHub</a>
         </li>
