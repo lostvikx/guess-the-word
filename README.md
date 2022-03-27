@@ -12,7 +12,7 @@ After each guess, the color of the tiles will show how close the guess was to th
 ---
 **Examples:**
 
-![example](src/img/example.png)
+![example](src/pages/img/example.png)
 
 The letter **C** is in the word and in the correct spot.
 
