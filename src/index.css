@@ -96,7 +96,7 @@ h1 {
 /* index page */
 .num-btns {
   gap: 1rem;
-  margin: 2rem;
+  margin: 1.5rem 1rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -163,7 +163,7 @@ h1 {
 }
 
 /* about section */
-.about-section {
+section {
   margin: 1rem;
 }
 
@@ -187,4 +187,8 @@ hr {
 img {
   display: block;
   margin: 0.5rem 0;
+}
+
+strong {
+  font-weight: 550;
 }
