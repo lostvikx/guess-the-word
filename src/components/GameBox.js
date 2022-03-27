@@ -3,7 +3,7 @@ import matchLetters from "../helper/matchLetters";
 import Keyboard from "./Keyboard";
 
 // This can be changed to alter the difficulty of the game!
-const numOfGuesses = 6;
+// const numOfGuesses = 6;
 
 function makeArrayWithBlankString(num) {
   const arr = [];
@@ -21,6 +21,8 @@ function getRandomFromArray(arr) {
 }
 
 export default function GameBox(props) {
+
+  const numOfGuesses = props.numLetters;
 
   const [guessEnum, setGuessEnum] = useState(0);
   const [allGuesses, setAllGuesses] = useState(makeArrayWithBlankString(numOfGuesses)); // [string]
@@ -74,6 +76,7 @@ export default function GameBox(props) {
           // guess string length < numLetters
           if (newAllGuessesArr[guessEnum].length < props.numLetters) {
             newAllGuessesArr[guessEnum] += event.key.toLowerCase();
+            setIsBadWord(false);
             return newAllGuessesArr;
           } else {
             return prevAllGuesses;
@@ -152,7 +155,7 @@ export default function GameBox(props) {
       // console.log("cleaning up...");
       document.removeEventListener("keydown", makeWord);
     }
-  }, [props.numLetters, allGuesses, guessEnum, metaWord, win, matched, wordsList]);
+  }, [props.numLetters, allGuesses, guessEnum, metaWord, win, matched, wordsList, numOfGuesses]);
 
   // console.log("allGuesses state:", allGuesses);
   // wordsList.includes(allGuesses[guessEnum]) && console.log(allGuesses[guessEnum]);
@@ -255,6 +258,7 @@ export default function GameBox(props) {
         // guess string length < numLetters
         if (newAllGuessesArr[guessEnum].length < props.numLetters) {
           newAllGuessesArr[guessEnum] += key;
+          setIsBadWord(false);
           return newAllGuessesArr;
         } else {
           return prevAllGuesses;
@@ -303,6 +307,9 @@ export default function GameBox(props) {
           setIsBadWord(true);
         }
 
+      } else {
+        console.log("word not long enough");
+        setIsBadWord(true);
       }
     }
 
