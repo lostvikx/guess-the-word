@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Header from "../components/Header";
 import exactMatchExample from "./img/gifts.png";
 import guessMatchExample from "./img/contain-match.png";
@@ -8,7 +8,13 @@ import Footer from "../components/Footer";
 
 export default function Rules() {
 
+  const [hover, setHover] = useState(false);
+
   document.title = "Rules | GuessTheWord";
+
+  function handleHover() {
+    setHover(prevHover => !prevHover);
+  }
 
   return (
     <div className="container">
@@ -29,7 +35,7 @@ export default function Rules() {
         <img src={guessNoMatchExample} alt="no guess match example" />
         <p>None of the letters in the above guess are is the word.</p>
         <p className="play">
-          <Link className="play-btn" to="/play">Play</Link>
+            <Link className="play-btn" to="/play" onMouseEnter={handleHover} onMouseLeave={handleHover}>{hover ? "🧁" : "Play"}</Link>
         </p>
       </section>
     </div>

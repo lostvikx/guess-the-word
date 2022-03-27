@@ -44,7 +44,7 @@ h1 {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 1em 1em 0.25em;
+  margin: 1rem 1rem 0.25rem;
 }
 
 .nav-links {
@@ -131,6 +131,11 @@ h1 {
   cursor: pointer;
   border-radius: 5px;
   text-transform: uppercase;
+  width: 200px;
+}
+
+.play-btn:hover {
+  background-color: #dae6ff;
 }
 
 .keyboard {
@@ -209,6 +214,7 @@ strong {
 
 footer p {
   text-align: center;
+  font-size: 0.75rem;
 }
 
 .container {

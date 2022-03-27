@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import matchLetters from "../helper/matchLetters";
 import Keyboard from "./Keyboard";
 
-// This can be changed to alter the difficulty of the game!
-// const numOfGuesses = 6;
-
 function makeArrayWithBlankString(num) {
   const arr = [];
   let i = 0;
@@ -22,6 +19,7 @@ function getRandomFromArray(arr) {
 
 export default function GameBox(props) {
 
+// This can be changed to alter the difficulty of the game!
   const numOfGuesses = props.numLetters;
 
   const [guessEnum, setGuessEnum] = useState(0);
@@ -32,12 +30,10 @@ export default function GameBox(props) {
   const [win, setWin] = useState(false);
   const [isBadWord, setIsBadWord] = useState(false);
   
-  // TODO: loading component
   // const [ loading, setLoading ] = useState(true);
 
   useEffect(() => {
 
-    // TODO: Implement client side caching
     const pathToWordFile = `assets/words/${props.numLetters}_letter_words.txt`;
 
     fetch(pathToWordFile)
