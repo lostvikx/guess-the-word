@@ -1,20 +1,34 @@
 import React from "react";
 
-function createKeyDivs(keysString) {
+function createKeyDivs(keysString, handleClick) {
 
   const isLastLine = keysString.startsWith("z");
 
   if (isLastLine) {
-    const keys = ["Enter"].concat(keysString.split("")).concat("<=").map((letter, i) => {
+    const keys = ["enter"].concat(keysString.split("")).concat("<=").map((letter, i) => {
       return (
-        letter.length > 1 ? <div key={i} className="key special-key">{letter}</div> : <div key={i} className="key">{letter}</div>
+        <div 
+          key={i} 
+          className="key" 
+          onClick={handleClick} 
+          value={letter}
+        >
+          {letter}
+        </div>
       );
     });
     return keys;
   } else {
     const keys = keysString.split("").map((letter, i) => {
       return (
-        <div key={i} className="key char-key">{letter}</div>
+        <div 
+          key={i} 
+          className="key char-key" 
+          onClick={handleClick} 
+          value={letter}
+        >
+          {letter}
+        </div>
       );
     });
     return keys;
@@ -23,11 +37,34 @@ function createKeyDivs(keysString) {
 
 export default function Keyboard(props) {
 
-  // console.log(props.allGuesses);
+  const i = props.i - 1;
+  const guess = props.allGuesses[i];
 
-  const upperLine = createKeyDivs("qwertyuiop");
-  const middleLine = createKeyDivs("asdfghjkl");
-  const lowerLine = createKeyDivs("zxcvbnm");
+  const letters = {
+    duds: [],
+    exact: [],
+    contains: []
+  };
+
+  // console.log(props.matched);
+
+  for (const match of props.matched) {
+
+    for (const index of match.exact) {
+      letters.exact.push(guess[index]);
+    }
+
+    for (const index of match.contains) {
+      letters.contains.push(guess[index]);
+    }
+
+  }
+
+  console.log(letters);
+
+  const upperLine = createKeyDivs("qwertyuiop", props.onClick);
+  const middleLine = createKeyDivs("asdfghjkl", props.onClick);
+  const lowerLine = createKeyDivs("zxcvbnm", props.onClick);
 
   return (
     <div className="keyboard">

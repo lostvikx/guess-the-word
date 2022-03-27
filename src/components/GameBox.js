@@ -233,10 +233,83 @@ export default function GameBox(props) {
     );
   });
 
+  function handleClickKeyboard(event) {
+
+    const key = event.target.textContent;
+
+    const hasChance = guessEnum < numOfGuesses && !win;
+    const isChar = hasChance && key.length === 1;
+    const isDel = hasChance && key === "<=";
+    const isEnter = hasChance && key === "enter";
+
+    if (isChar) {
+      setAllGuesses(prevAllGuesses => {
+        const newAllGuessesArr = [...prevAllGuesses];
+        // guess string length < numLetters
+        if (newAllGuessesArr[guessEnum].length < props.numLetters) {
+          newAllGuessesArr[guessEnum] += key;
+          return newAllGuessesArr;
+        } else {
+          return prevAllGuesses;
+        }
+      });
+    }
+
+    if (isDel) {
+      setAllGuesses(prevAllGuesses => {
+        const newAllGuessesArr = [...prevAllGuesses];
+        // guess string length > 0
+        if (newAllGuessesArr[guessEnum].length > 0) {
+          newAllGuessesArr[guessEnum] = newAllGuessesArr[guessEnum].slice(0, -1);
+          setIsBadWord(false);
+          return newAllGuessesArr;
+        } else {
+          return prevAllGuesses;
+        }
+      });
+    }
+
+    if (isEnter) {
+      const guessWord = allGuesses[guessEnum];
+
+      // check word is in the wordList
+      const isLegalWord = wordsList.includes(allGuesses[guessEnum]);
+
+      // guess string length === numLetters
+      if (guessWord.length === props.numLetters) {
+        // console.log("Enter!");
+        if (isLegalWord) {
+          setGuessEnum(prevGuessEnum => prevGuessEnum + 1);
+
+          // correct word
+          setIsBadWord(false);
+
+          setMatched(prevMatched => {
+            const newMatched = [...prevMatched];
+            newMatched[guessEnum] = matchLetters(metaWord, guessWord);
+            // console.log("matched state:", newMatched);
+            return newMatched;
+          });
+        } else {
+          console.log("word is illegal");
+          // current guess is long enough, but is not a legal word
+          setIsBadWord(true);
+        }
+
+      }
+    }
+
+  }
+
   return (
     <div className="game-box">
       { allGuessRows }
-      <Keyboard allGuesses={allGuesses} />
+      <Keyboard 
+        allGuesses={allGuesses} 
+        onClick={handleClickKeyboard} 
+        matched={matched}
+        i={guessEnum}
+      />
     </div>
   );
 }

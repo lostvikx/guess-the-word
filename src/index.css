@@ -1,6 +1,6 @@
 :root {
   --link: rgb(58, 58, 245);
-  --grey: rgb(177, 177, 177);
+  --grey: gainsboro;
 }
 
 *, *::before, *::after {
@@ -146,9 +146,12 @@ h1 {
   justify-content: center;
   text-transform: uppercase;
   font-size: 0.65rem;
+  cursor: pointer;
+  user-select: none;
 }
 
 /* .char-key {
   width: 35px;
   height: 35px;
 } */
+
