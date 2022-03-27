@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 function createKeyDivs(keysString, handleClick) {
 
@@ -37,25 +37,78 @@ function createKeyDivs(keysString, handleClick) {
 
 export default function Keyboard(props) {
 
-  const i = props.i - 1;
-  const guess = props.allGuesses[i];
-
-  const letters = {
+  const [letters, setLetters] = useState({
+    all: [],
     duds: [],
     exact: [],
     contains: []
-  };
+  });
 
-  // console.log(props.matched);
+  const i = props.i - 1;
+  const guess = props.allGuesses[i];
+  console.log(guess);
 
-  for (const match of props.matched) {
+  // console.log(props.matched, i);
 
-    for (const index of match.exact) {
-      letters.exact.push(guess[index]);
+  if (props.matched.length && props.matched[i]) {
+    
+    // console.log(i, props.matched[i]);
+    // console.log("exact match:", props.matched[i].exact);
+    // console.log("contains match:", props.matched[i].contains);
+
+    for (const index of props.matched[i].exact) {
+
+      const isNewLetter = !letters.all.includes(guess[index]);
+      const isInContains = letters.contains.includes(guess[index]);
+
+      if(isNewLetter) {
+        setLetters(prevLetters => {
+          const newLetters = { ...prevLetters };
+          newLetters.all.push(guess[index]);
+          newLetters.exact.push(guess[index]);
+          return newLetters;
+        });
+      }
+
+      if (isInContains) {
+        console.log("was in contains");
+        setLetters(prevLetters => {
+          const newLetters = { ...prevLetters };
+          newLetters.contains = newLetters.contains.filter(letter => letter !== guess[index]);
+          newLetters.exact = newLetters.exact.filter(letter => letter !== guess[index]);
+          newLetters.exact.push(guess[index]);
+          return newLetters;
+        });
+      }
+
     }
 
-    for (const index of match.contains) {
-      letters.contains.push(guess[index]);
+    for (const index of props.matched[i].contains) {
+
+      const isNewLetter = !letters.all.includes(guess[index]);
+
+      if(isNewLetter) {
+        setLetters(prevLetters => {
+          const newLetters = { ...prevLetters };
+          newLetters.all.push(guess[index]);
+          newLetters.contains.push(guess[index]);
+          return newLetters;
+        });
+      }
+    }
+
+    for (const letter of guess) {
+      const isNewLetter = !letters.all.includes(letter);
+
+      if (isNewLetter) {
+        setLetters(prevLetters => {
+          const newLetters = { ...prevLetters };
+          newLetters.all.push(letter);
+          newLetters.duds.push(letter);
+          return newLetters;
+        });
+      }
+
     }
 
   }
