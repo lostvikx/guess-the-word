@@ -33,7 +33,7 @@ li {
 h1 {
   font-weight: 500;
   margin: 1rem;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
 }
 
 /* navbar */
@@ -60,7 +60,7 @@ h1 {
 
 /* game box - main content */
 .game-box {
-  margin: 2rem 1rem;
+  margin: 1rem 1rem 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -115,7 +115,7 @@ h1 {
   outline: none;
   background-color: rgb(243, 243, 169);
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 500;
   cursor: pointer;
 }
@@ -123,9 +123,11 @@ h1 {
 .keyboard {
   display: flex;
   flex-direction: column;
-  margin: 1rem;
+  margin: 1rem 0 0;
+  gap: 0.25rem;
   align-items: center;
   justify-content: center;
+  max-width: 100%;
 }
 
 .upperline, .middleline, .lowerline {
@@ -133,16 +135,20 @@ h1 {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.25em;
+  gap: 0.25rem;
 }
 
 .key {
   background-color: gainsboro;
-  padding: 0.5em;
-  min-width: 20px;
-  min-height: 20px;
-  text-align: center;
+  padding: 0.7em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-transform: uppercase;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
+
+/* .char-key {
+  width: 35px;
+  height: 35px;
+} */

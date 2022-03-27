@@ -2,22 +2,19 @@ import React from "react";
 
 function createKeyDivs(keysString) {
 
-  let isLastLine = false;
-  if (keysString.startsWith("z")) {
-    isLastLine = true;
-  }
+  const isLastLine = keysString.startsWith("z");
 
   if (isLastLine) {
-    const keys = ["Enter"].concat(keysString.split("")).concat("<").map((letter, i) => {
+    const keys = ["Enter"].concat(keysString.split("")).concat("<=").map((letter, i) => {
       return (
-        <div key={i} className="key">{letter}</div>
+        letter.length > 1 ? <div key={i} className="key special-key">{letter}</div> : <div key={i} className="key">{letter}</div>
       );
     });
     return keys;
   } else {
     const keys = keysString.split("").map((letter, i) => {
       return (
-        <div key={i} className="key">{letter}</div>
+        <div key={i} className="key char-key">{letter}</div>
       );
     });
     return keys;
