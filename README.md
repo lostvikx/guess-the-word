@@ -19,6 +19,6 @@ The letter **C** is in the word and in the correct spot.
 
 The letter **O** is in the word, but in is the wrong spot.
 
-![no guess match example](src/pages/img/example.png)
+![no guess match example](src/pages/img/none-match.png)
 
 None of the letters in the above guess are is the word.
