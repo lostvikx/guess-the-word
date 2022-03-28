@@ -25,4 +25,4 @@ The letter <strong>A</strong> and <strong>E</strong> are in the word, but in the
 
 None of the letters in the above guess are is the word.
 
-Checkout the website [here]().
+Check out the website [here](https://lostvikx.github.io/guess-the-word/).
