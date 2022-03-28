@@ -7,7 +7,7 @@ import Rules from "./pages/Rules";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/guess-the-word">
       <Routes>
         <Route path="/" element={<Rules />} />
         <Route path="/play" element={<App />} />
