@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import matchLetters from "../helper/matchLetters";
 import Keyboard from "./Keyboard";
+import { getLocalData, setLocalData } from "./../helper/localStorage";
 
 function makeArrayWithBlankString(num) {
   const arr = [];
@@ -34,23 +35,36 @@ export default function GameBox(props) {
 
   useEffect(() => {
 
-    const pathToWordFile = `assets/words/${props.numLetters}_letter_words.txt`;
+    const fileName = `${props.numLetters}_letter_words`;
+    const pathToWordFile = `assets/words/${fileName}.txt`;
 
-    fetch(pathToWordFile)
-      .then(res => res.text())
-      .then(data => {
-        const allWords = data
-          .split(/\r?\n/)
-          .filter(word => word.length !== 0);
-          
-        const randomWord = getRandomFromArray(allWords);
+    let allWords = getLocalData(fileName);
 
-        setWordsList(allWords);
-        setMetaWord(randomWord);
-        // sneek peek
-        console.log(randomWord);
-      })
-      .catch(err => console.error(err));
+    if (!allWords) {
+      fetch(pathToWordFile)
+        .then(res => res.text())
+        .then(data => {
+          const allWords = data
+            .split(/\r?\n/)
+            .filter(word => word.length !== 0);
+
+          const randomWord = getRandomFromArray(allWords);
+
+          setWordsList(allWords);
+          setMetaWord(randomWord);
+          // sneek peek
+          console.log(randomWord);
+
+          setLocalData(fileName, allWords);
+        })
+        .catch(err => console.error(err));
+    } else {
+      const randomWord = getRandomFromArray(allWords);
+      setWordsList(allWords);
+      setMetaWord(randomWord);
+      // sneek peek
+      console.log(randomWord);
+    }
 
   }, [props.numLetters]);
 
