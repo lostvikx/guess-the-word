@@ -6,6 +6,6 @@ Wordle clone with additional features.
 - [x] Footer
 - [ ] Loading component
 - [x] Implement client side caching `localStorage`
-- [ ] Test the matchLetter algo
+- [x] Fix the matchLetter algo
 - [ ] Test the keyboard highlighting feature
-- [ ] Display correct word, if no chances are left
+- [x] Display correct word, if no chances are left
