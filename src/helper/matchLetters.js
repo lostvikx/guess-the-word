@@ -1,12 +1,4 @@
-function getFrequencyObj(str) {
-  const frequencyObj = {};
-  for (const letter of str) {
-    frequencyObj[letter] = (frequencyObj[letter])
-      ? frequencyObj[letter] + 1
-      : 1;
-  }
-  return frequencyObj;
-}
+import { getFrequencyObj } from "./helperFunc";
 
 /**
  * matchLetters takes two arguments.
@@ -50,10 +42,7 @@ export default function matchLetters(word, guess) {
     // From the matches.contains array, we only remove the value that was exhausted and exactMatch was found.
     if (exactMatch && !canGuess) {
 
-      const newExact = [];
-      const newContains = [];
-
-      console.log(i);
+      // console.log(i);
       // matches.contains.includes(i) && console.log("i in contains");
 
       let indexToBeTransferedToExact = null;
@@ -72,9 +61,6 @@ export default function matchLetters(word, guess) {
       console.log("contains:", matches.contains, "exact:", matches.exact);
 
       matches.exact.push(i);
-
-      console.log("newExact arr to concat:", newExact);
-      console.log("newContains arr to concat:", newContains);
 
     }
 
