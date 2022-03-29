@@ -29,7 +29,7 @@ export default function Rules() {
         <hr />
         <h2>Examples:</h2>
         <img src={exactMatchExample} alt="guess match example" />
-        <p>The letter <strong>C</strong> is in the word and in the correct spot.</p>
+        <p>The letter <strong>G</strong> is in the word and in the correct spot.</p>
         <img src={guessMatchExample} alt="guess match example" />
         <p>The letter <strong>A</strong> and <strong>E</strong> are in the word, but in the wrong spots.</p>
         <img src={guessNoMatchExample} alt="no guess match example" />

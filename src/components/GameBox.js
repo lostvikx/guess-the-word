@@ -2,21 +2,7 @@ import React, { useEffect, useState } from "react";
 import matchLetters from "../helper/matchLetters";
 import Keyboard from "./Keyboard";
 import { getLocalData, setLocalData } from "./../helper/localStorage";
-
-function makeArrayWithBlankString(num) {
-  const arr = [];
-  let i = 0;
-  while (i < num) {
-    arr.push("");
-    i++;
-  }
-  return arr;
-}
-
-function getRandomFromArray(arr) {
-  const randomIndex = Math.floor(Math.random() * arr.length);
-  return arr[randomIndex];
-}
+import { makeArrayWithBlankString, getRandomFromArray } from "../helper/helperFunc";
 
 export default function GameBox(props) {
 

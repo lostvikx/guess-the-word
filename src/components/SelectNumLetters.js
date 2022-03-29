@@ -1,15 +1,10 @@
 import React from "react";
 
-function getRandomFromArray(arr) {
-  const randomIndex = Math.floor(Math.random() * arr.length);
-  return arr[randomIndex];
-}
-
 export default function SelectNumLetters(props) {
 
-  const colors = ["#dae6ff", "#c6b8ff", "#dcfce7", "#e9d5ff"];
+  // const colors = ["#dae6ff", "#c6b8ff", "#dcfce7", "#e9d5ff"];
   const wordNumberSelection = [5, 6, 7, 8];
-  const colorful = getRandomFromArray(colors);
+  // const backColor = getRandomFromArray(colors);
   
   const buttonList = wordNumberSelection.map((number, i) => {
     return (
@@ -19,7 +14,7 @@ export default function SelectNumLetters(props) {
         value={number}
         onClick={(event) => props.handleClick(Number(event.target.value))}
         key={i}
-        style={{ backgroundColor: colorful }}
+        style={{ backgroundColor: "#c6b8ff" }}
       >
         {number} Letters
       </button>

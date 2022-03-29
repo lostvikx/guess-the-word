@@ -115,6 +115,10 @@ h1 {
   border-radius: 5px;
 }
 
+.letter-num-selection-btn:hover {
+  color: white;
+}
+
 .play {
   text-align: center;
   margin: 1rem 0;
