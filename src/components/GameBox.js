@@ -4,6 +4,7 @@ import Keyboard from "./Keyboard";
 import { getLocalData, setLocalData } from "./../helper/localStorage";
 import { makeArrayWithBlankString, getRandomFromArray } from "../helper/helperFunc";
 import CorrectWord from "./CorrectWord";
+import WinningMessage from "./WinningMessage";
 
 export default function GameBox(props) {
 
@@ -151,7 +152,7 @@ export default function GameBox(props) {
     if (!win) {
       for (const match of matched) {
         if (match.exact.length === props.numLetters) {
-          console.log("Winner! 🎉");
+          // console.log("You Win! 🎉");
           setWin(true);
           break;
         }
@@ -327,6 +328,7 @@ export default function GameBox(props) {
     <div className="game-box">
       { allGuessRows }
       {displayMetaWord && <CorrectWord metaWord={metaWord} />}
+      {win && <WinningMessage />}
       <Keyboard 
         allGuesses={allGuesses} 
         onClick={handleClickKeyboard} 

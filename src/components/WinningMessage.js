@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CorrectWord(props) {
+export default function WinningMessage() {
 
   const styles = {
     margin: "1rem 0 0",
@@ -11,7 +11,7 @@ export default function CorrectWord(props) {
       <article 
         style={styles}
       >
-        Correct Word: <span style={{ textTransform: "uppercase", letterSpacing: "1px" }}>{props.metaWord}</span> 🧁
+        You Win! 🎉
       </article>
     </div>
   );
