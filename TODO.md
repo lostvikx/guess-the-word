@@ -4,7 +4,7 @@ Wordle clone with additional features.
 
 ### Working
 - [x] Footer
-- [ ] Loading component
+- [ ] Fix keyboard size on mobile screen
 - [x] Winning message
 - [x] Implement client side caching `localStorage`
 - [x] Fix the matchLetter algo
