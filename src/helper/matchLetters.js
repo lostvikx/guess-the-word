@@ -13,7 +13,7 @@ export default function matchLetters(word, guess) {
 
   const wordFrequency = getFrequencyObj(word);
 
-  console.log("letter frequency:", wordFrequency);
+  // console.log("letter frequency:", wordFrequency);
 
   const matches = {
     exact: [],
@@ -54,11 +54,11 @@ export default function matchLetters(word, guess) {
         }
       }
 
-      console.log("contains:", matches.contains, "exact:", matches.exact);
+      // console.log("contains:", matches.contains, "exact:", matches.exact);
 
       matches.contains = matches.contains.filter(num => num !== indexToBeTransferedToExact);
 
-      console.log("contains:", matches.contains, "exact:", matches.exact);
+      // console.log("contains:", matches.contains, "exact:", matches.exact);
 
       matches.exact.push(i);
 
@@ -67,7 +67,7 @@ export default function matchLetters(word, guess) {
     i++;
   }
 
-  console.log("updated letter frequency:", wordFrequency);
+  // console.log("updated letter frequency:", wordFrequency);
 
   return matches;
 

@@ -73,7 +73,7 @@ export default function Keyboard(props) {
 
   if (props.matched.length && props.matched[i]) {
 
-    // console.log(i, props.matched[i]);
+    console.log(i, props.matched[i]);
     // console.log("exact match:", props.matched[i].exact);
     // console.log("contains match:", props.matched[i].contains);
 
