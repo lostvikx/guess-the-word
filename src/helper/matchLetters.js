@@ -1,22 +1,27 @@
+function getFrequencyObj(str) {
+  const frequencyObj = {};
+  for (const letter of str) {
+    frequencyObj[letter] = (frequencyObj[letter])
+      ? frequencyObj[letter] + 1
+      : 1;
+  }
+  return frequencyObj;
+}
+
 /**
  * matchLetters takes two arguments.
  * The return value is an object of with properties of exact and includes that match.
  * @param {string} word - variable metaWord
  * @param {string} guess - variable guessWord
- * @return {[object]} - indices of match letters
+ * @return {[object]} indices of match letters
  */
 export default function matchLetters(word, guess) {
 
   console.assert(word.length === guess.length, "word length != guess word length");
 
-  const letterFrequency = {};
-  for (const letter of word) {
-    letterFrequency[letter] = (letterFrequency[letter]) 
-      ? letterFrequency[letter] + 1 
-      : 1;
-  }
+  const wordFrequency = getFrequencyObj(word);
 
-  // console.log("letter frequency:", letterFrequency);
+  console.log("letter frequency:", wordFrequency);
 
   const matches = {
     exact: [],
@@ -24,51 +29,62 @@ export default function matchLetters(word, guess) {
   };
 
   let i = 0;
-  while (i < word.length) {
+  while (i < guess.length) {
 
     const exactMatch = word[i] === guess[i];
-    const canGuess = letterFrequency[guess[i]] > 0;
+    const canGuess = wordFrequency[guess[i]] > 0;
 
     // exact match (green)
     if (exactMatch && canGuess) {
       matches.exact.push(i);
-      letterFrequency[guess[i]]--;
+      wordFrequency[guess[i]]--;
     }
 
     // contains match (yellow)
     if (!exactMatch && canGuess) {
       matches.contains.push(i);
-      letterFrequency[guess[i]]--;
+      wordFrequency[guess[i]]--;
     }
 
     // If found an exact match after the user has exhausted the frequency of that letter (already guessed it).
     // From the matches.contains array, we only remove the value that was exhausted and exactMatch was found.
     if (exactMatch && !canGuess) {
+
       const newExact = [];
       const newContains = [];
 
-      // console.log("matches.contains:", matches.contains);
+      console.log(i);
+      // matches.contains.includes(i) && console.log("i in contains");
 
-      if (!matches.contains.includes(i) && !newExact.includes(i)) {
-        newExact.push(i);
-      }
+      let indexToBeTransferedToExact = null;
 
-      for (let j = 0; j < matches.contains.length; j++) {
-        if (guess[j] !== guess[i]) {
-          newContains.push(j);
+      for (const index of matches.contains) {
+        if (guess[index] === guess[i]) {
+          console.log(index, "==", i);
+          indexToBeTransferedToExact = index;
         }
       }
 
-      // console.log("newExact arr to concat:", newExact);
-      matches.exact.push(...newExact);
-      matches.contains = newContains;
+      console.log("contains:", matches.contains, "exact:", matches.exact);
+
+      matches.contains = matches.contains.filter(num => num !== indexToBeTransferedToExact);
+
+      console.log("contains:", matches.contains, "exact:", matches.exact);
+
+      matches.exact.push(i);
+
+      console.log("newExact arr to concat:", newExact);
+      console.log("newContains arr to concat:", newContains);
+
     }
 
     i++;
   }
 
+  console.log("updated letter frequency:", wordFrequency);
+
   return matches;
 
 }
 
-// console.log(matchLetters("joker", "oajer"));
+// console.log(matchLetters("btckaskith", "baknabkgtt"));
