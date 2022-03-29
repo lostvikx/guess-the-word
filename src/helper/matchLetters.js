@@ -7,7 +7,7 @@
  */
 export default function matchLetters(word, guess) {
 
-  console.assert(word.length === guess.length);
+  console.assert(word.length === guess.length, "word length != guess word length");
 
   const letterFrequency = {};
   for (const letter of word) {
@@ -70,3 +70,5 @@ export default function matchLetters(word, guess) {
   return matches;
 
 }
+
+// console.log(matchLetters("joker", "oajer"));
