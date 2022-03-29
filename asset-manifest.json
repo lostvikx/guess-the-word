@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/guess-the-word/static/css/main.cb50664e.css",
-    "main.js": "/guess-the-word/static/js/main.5d3ef2be.js",
+    "main.js": "/guess-the-word/static/js/main.73543a7d.js",
     "index.html": "/guess-the-word/index.html",
     "main.cb50664e.css.map": "/guess-the-word/static/css/main.cb50664e.css.map",
-    "main.5d3ef2be.js.map": "/guess-the-word/static/js/main.5d3ef2be.js.map"
+    "main.73543a7d.js.map": "/guess-the-word/static/js/main.73543a7d.js.map"
   },
   "entrypoints": [
     "static/css/main.cb50664e.css",
-    "static/js/main.5d3ef2be.js"
+    "static/js/main.73543a7d.js"
   ]
 }
