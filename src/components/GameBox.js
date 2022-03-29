@@ -3,6 +3,7 @@ import matchLetters from "../helper/matchLetters";
 import Keyboard from "./Keyboard";
 import { getLocalData, setLocalData } from "./../helper/localStorage";
 import { makeArrayWithBlankString, getRandomFromArray } from "../helper/helperFunc";
+import CorrectWord from "./CorrectWord";
 
 export default function GameBox(props) {
 
@@ -18,6 +19,17 @@ export default function GameBox(props) {
   const [isBadWord, setIsBadWord] = useState(false);
   
   // const [ loading, setLoading ] = useState(true);
+
+  // console.log(guessEnum, allGuesses[allGuesses.length - 1]);
+  const allGuessesUsed = matched.length === numOfGuesses;
+
+  const [ displayMetaWord, setDisplayMetaWord ] = useState(false);
+
+  useEffect(() => {
+    if (allGuessesUsed) {
+      setDisplayMetaWord(true);
+    }
+  }, [allGuessesUsed]);
 
   useEffect(() => {
 
@@ -314,6 +326,7 @@ export default function GameBox(props) {
   return (
     <div className="game-box">
       { allGuessRows }
+      {displayMetaWord && <CorrectWord metaWord={metaWord} />}
       <Keyboard 
         allGuesses={allGuesses} 
         onClick={handleClickKeyboard} 

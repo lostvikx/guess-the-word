@@ -16,6 +16,7 @@ body {
   font-family: 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
   max-width: 1000px;
   margin: 0 auto;
+  user-select: none;
 }
 
 a {
