@@ -51,7 +51,7 @@ export default function GameBox(props) {
           setWordsList(allWords);
           setMetaWord(randomWord);
           // sneek peek
-          console.log(randomWord);
+          // console.log(randomWord);
 
           setLocalData(fileName, allWords);
         })
@@ -61,7 +61,7 @@ export default function GameBox(props) {
       setWordsList(allWords);
       setMetaWord(randomWord);
       // sneek peek
-      console.log(randomWord);
+      // console.log(randomWord);
     }
 
   }, [props.numLetters]);
