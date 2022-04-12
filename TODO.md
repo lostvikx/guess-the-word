@@ -10,3 +10,9 @@ Wordle clone with additional features.
 - [x] Fix the matchLetter algo
 - [x] Test the keyboard highlighting feature
 - [x] Display correct word, if no chances are left
+
+### Innovative Ideas
+- [ ] Let the user choose number of words/difficulty
+- [ ] Remember previously guessed words
+- [ ] Multiplayer support - play with friends
+- [ ] Guess each word in a sentence

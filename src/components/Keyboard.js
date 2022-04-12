@@ -4,57 +4,34 @@ function createKeyDivs(keysString, handleClick, lettersObj) {
 
   const isLastLine = keysString.startsWith("z");
 
-  if (isLastLine) {
-    const keys = ["enter"].concat(keysString.split("")).concat("<=").map((letter, i) => {
+  const keyRow = isLastLine 
+    ? ["enter"].concat(keysString.split("")).concat("<=") 
+    : keysString.split("");
 
-      const className = ["key"];
+  const key = keyRow.map((letter, i) => {
 
-      if (lettersObj.exact.includes(letter)) {
-        className.push("exact-match");
-      } else if (lettersObj.contains.includes(letter)) {
-        className.push("contains-match");
-      } else if (lettersObj.all.includes(letter)) {
-        className.push("dud-match");
-      }
+    const className = ["key"];
 
-      return (
-        <div 
-          key={i} 
-          className={className.join(" ")} 
-          onClick={handleClick} 
-          value={letter}
-        >
-          {letter}
-        </div>
-      );
-    });
-    return keys;
-  } else {
-    const keys = keysString.split("").map((letter, i) => {
+    if (lettersObj.exact.includes(letter)) {
+      className.push("exact-match");
+    } else if (lettersObj.contains.includes(letter)) {
+      className.push("contains-match");
+    } else if (lettersObj.all.includes(letter)) {
+      className.push("dud-match");
+    }
 
-      const className = ["key"];
-
-      if (lettersObj.exact.includes(letter)) {
-        className.push("exact-match");
-      } else if (lettersObj.contains.includes(letter)) {
-        className.push("contains-match");
-      } else if (lettersObj.all.includes(letter)) {
-        className.push("dud-match");
-      }
-
-      return (
-        <div 
-          key={i} 
-          className={className.join(" ")} 
-          onClick={handleClick} 
-          value={letter}
-        >
-          {letter}
-        </div>
-      );
-    });
-    return keys;
-  }
+    return (
+      <div 
+        key={i} 
+        className={className.join(" ")} 
+        onClick={handleClick} 
+        value={letter}
+      >
+        {letter}
+      </div>
+    );
+  });
+  return key;
 }
 
 export default function Keyboard(props) {
